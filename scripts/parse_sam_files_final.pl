@@ -1,10 +1,8 @@
 #!/usr/bin/perl -w
 
 use strict;
-use lib '/home/mplass/modules/';
-use Sequence;
-use Alignment;
-use General;
+use lib './resources/';
+use Pipeline_functions;
 use Getopt::Long;
 
 my $file   ="";
@@ -79,7 +77,7 @@ else{
 ## define hash with IDs to be removed
 my %remove;
 unless ($remove  eq ""){
-    %remove = %{General::read_table($remove,0)};
+    %remove = %{Pipeline_functions::read_table($remove,0)};
 }
 
 ## open OUTPUT file
@@ -132,8 +130,9 @@ while (<$fh>){
     my $chr = $line[2];
     ### define target coordinates in the genome (close notation) ###
     my $tstart =  $line[3];      ## target start	
-    my $cigar_line = Alignment::parse_cigar ($line[5]);    ## cigar_line (full)
+    my $cigar_line = Pipeline_functions::parse_cigar ($line[5]);    ## cigar_line (full)
     my $target_len = scalar (my @match=$cigar_line=~m/(S|D|M)/g);	
+
     if ($cigar_line=~m/^(S+)/){  ## recalculate "real" target start after soft clipping
 	my $start= length ($1);
 	$tstart -=$start;
@@ -209,10 +208,10 @@ sub process_batch{
 	    my $tseq = $seqs[$i];
 	
 	    ### recover the alignment between the read and the target read 
-	    my @aln = Alignment::get_alignment_from_cigar($readseq,$tseq,$cigar_line);
+	    my @aln = Pipeline_functions::get_alignment_from_cigar($readseq,$tseq,$cigar_line);
 	
 	    ### make the extended cigar_line
-	    my $newcigar =Alignment::get_extended_cigar (@aln, $cigar_line);
+	    my $newcigar =Pipeline_functions::get_extended_cigar (@aln, $cigar_line);
 	
 	    ### my get quality scores
 	    my @stats = get_aligned_stats ($aln[0],$aln[1],$newcigar,$quality_scores,$strand);
@@ -236,16 +235,14 @@ sub recover_seqs{
     my $index = $_[1];
     my $bedfile = "file.".$$.".bed";
     
-    # ($readname,$chr,$tstart,$tend,$strand,$target_len,$cigar_line,$mapping_quality,$readseq,$pp);
     ## print bed file
-#    print STDERR scalar (@batch);
     open (ARX, ">$bedfile") || die ("cannot open $bedfile for writing");
     for (my $i = 0; $i < @batch; $i++){
 	print ARX join ("\t", $batch[$i][1], $batch[$i][2]-1, $batch[$i][3],".",".",$batch[$i][4]), "\n";
     }
     close (ARX);
 
-    my $outfile = Sequence::getseq_bedtools($bedfile,$index);
+    my $outfile = Pipeline_functions::getseq_bedtools($bedfile,$index);
     unlink ($bedfile);
     return $outfile;
 }

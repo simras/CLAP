@@ -9,8 +9,7 @@ Install Python (link https://www.python.org/)
 # Install bwa-pssm
 *Install GNU scientific library
 *Install zlib
-*
-Install pyicos
+*Install pyicos
 
 # check install script to identify possible problems
 Run python setup.py

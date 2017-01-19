@@ -104,7 +104,7 @@ scripts=$BASE"/scripts"
 # Configurations
 # PSSM location
 bwa=$BASE/../bwa-pssm/bwa
-pyicos=$BASE/../pyicos/pyicoclip
+pyicos=pyicoclip
 
 if [ ${#12} -gt 0 ]
 then
@@ -202,75 +202,91 @@ FILE_NAME=$(dirname $file_list)
     fi
     
     # cut suffix .fastq
-   # FILE=${FILE%.*}
+    # FILE=${FILE%.*}
     map_reads=${FILE%.*}
+    map_exon=$map_reads.ej
     echo "Map"
-    if [ $9 -ne 2 ]
+    if [ ${10} -eq 0 ]
     then
-	if [ ${10} -eq 0 ]
-	then
-	    # Map with error model
-	    $bwa pssm -n $E -l $L -m $H -t $T -P $P $phreadOpt -G $BASE/cluster/error_model_125.txt $idx1 $FILE_NAME/$map_reads.fastq  > $outFolder/$map_reads.sai
-	else
-	    $bwa pssm -n $E -l $L -m $H -t $T -P $P $phreadOpt $idx1 $FILE_NAME/$map_reads.fastq  > $outFolder/$map_reads.sai
-	fi
+	# Map with error model
+	$bwa pssm -n $E -l $L -m $H -t $T -P $P $phreadOpt -G $BASE/cluster/error_model_125.txt $idx1 $FILE_NAME/$map_reads.fastq  > $outFolder/$map_reads.sai
+    else
+	$bwa pssm -n $E -l $L -m $H -t $T -P $P $phreadOpt $idx1 $FILE_NAME/$map_reads.fastq  > $outFolder/$map_reads.sai
 	$bwa samse -f $outFolder/$map_reads.sam $idx1 $outFolder/$map_reads.sai $FILE_NAME/$map_reads.fastq
 	$scripts/mappingStats.sh $outFolder/$map_reads.sam $PP y > $outFolder/$map_reads.mappingstats.txt
     fi
     if [ $9 -eq 2 ]
     then
 	# Exon-junction mapping
-	map_exon=$map_reads.unmapped
 	$BASE/scripts/select_unmapped_reads.pl -f $FILE_NAME/$map_reads.fastq -s $outFolder/$map_reads.sam  > $outFolder/$map_exon.fastq
+	
+	if [ ${10} -eq 0 ]
+	then	
+	    $bwa pssm -n $E -l $L -m $H -t $T -P $P $phreadOpt -G $BASE/cluster/error_model_125.txt $idx3 $outFolder/$map_exon.fastq > $outFolder/$map_exon.sai
+	else
+	    $bwa pssm -n $E -l $L -m $H -t $T -P $P $phreadOpt $idx3 $outFolder/$map_exon.fastq > $outFolder/$map_exon.sai
+	fi
+	$bwa samse -f $outFolder/$map_exon.sam $idx3 $outFolder/$map_exon.sai $outFolder/$map_exon.fastq
+	$scripts/mappingStats.sh $outFolder/$map_exon.sam $PP y > $outFolder/$map_exon.mappingstats.txt
     fi
-    if [ ${10} -eq 0 ]
+#done
+
+    if [ $9 -ne 2 ] # remove
     then
-	nice $p
-	$bwa pssm -n $E -l $L -m $H -t $T -P $P $phreadOpt -G $BASE/cluster/error_model_125.txt $idx3 $outFolder/$map_exon.fastq > $outFolder/$map_exon.sai
-    else
-	nice $bwa pssm -n $E -l $L -m $H -t $T -P $P $phreadOpt $idx3 $outFolder/$map_exon.fastq > $outFolder/$map_exon.sai
+	
+	# Make bed-files 
+	# Genome
+	$BASE/scripts/parse_sam_files_final.pl -p $idx1 -t pssm -c $PP -f $outFolder/$map_reads.sam -o $outFolder/$map_reads.bed -a
     fi
-    #    nice $pssm pssm -n $E -l $L -m $H -t $T $dindex $outFolder/$FILE.unmapped.fastq > $outFolder/$FILE.unmapped.sai
-    $bwa samse -f $outFolder/$map_exon.sam $idx3 $outFolder/$map_exon.sai $outFolder/$map_exon.fastq
-    $scripts/mappingStats.sh $outFolder/$map_exon.sam $PP y > $outFolder/$map_exon.mappingstats.txt
-done
-
-# Make bed-files 
-# Genome
-$BASE/scripts/parse_sam_files_final.pl -p $idx1 -t pssm -c $PP -f $outFolder/$map_reads.sam -o $outFolder/$map_reads.bed -a
-
-# Exon junctions
-$BASE/scripts/parse_sam_files_ej_final.pl -p $idx3 -t pssm -c $PP -f $outFolder/$map_exon.sam -o $outFolder/$map_exon.bed -a
-
+    if [ $9 -eq 2 ]
+    then
+	# Exon junctions
+	$BASE/scripts/parse_sam_files_ej_final.pl -p $idx3 -t pssm -c $PP -f $outFolder/$map_exon.sam -o $outFolder/$map_exon.bed -a
+    fi
 # peak Calling
-exon_annot=$BASE"/resources/ensembl70.long.exons"
-exon_annot="/seqdata/krogh/mplass/RBPs/FDR/ensembl70.long.exons"
-peak_in=.bed
-peak_out=.pk
-if [ ${14} -eq 0 ]
+exon_annot=$BASE"/resources/ensembl70.all.long_nooverlap.txt"
+#exon_annot="/seqdata/krogh/mplass/RBPs/FDR/ensembl70.long.exons.txt"
+
+
+
+if [ ${14} -ne 0 ]
 then
-    
-    cp $peak_in $peak_out
-else
     if [ $8 -eq 0 ]
     then
-	$pyicos $peak_in $peak_out -f bed -F bed_pk --region $exon_annot --stranded
+	$pyicos -F 'bed_pk' --region $exon_annot --stranded $outFolder/$peak_in $outFolder/$peak_out 
     else
 	# not stranded
-	$pyicos $peak_in $peak_out -f bed -F bed_pk --region $exon_annot
+	$pyicos -F 'bed_pk' --region $exon_annot $outFolder/$peak_in $outFolder/$peak_out 
     fi
-#    # not stranded
-#    $pyicos RBP.all.bed RBP.pk -f bed -F bed_pk --region $exon_annot
-
+    #    # not stranded
 fi
+
 if [ $9 -eq 1 ]
 then
+    # Genome reads
+    peak_in=$map_reads.bed
+    peak_out=$map_reads.pk
     # rename genome reads file
     cat $outFolder/$map_reads.bed  > $outFolder/$final_bed
 fi
 
 if [ $9 -eq 2 ]
 then
+    # exon junctions
+    peak_in=$map_exon.bed
+    peak_out=$map_exon.pk
+    if [ ${14} -ne 0 ]
+    then
+	if [ $8 -eq 0 ]
+	then
+	    $pyicos -f 'bed' -F 'bed_pk' --region $exon_annot --stranded $outFolder/$peak_in $outFolder/$peak_out 
+	else
+	    # not stranded
+	    $pyicos -f 'bed' -F 'bed_pk' --region $exon_annot $outFolder/$peak_in $outFolder/$peak_out 
+	fi
+	#    # not stranded
+    fi
+    
     # Merge reads from genome and exon junctions
     cat $outFolder/$map_reads.bed $outFolder/$map_exon.bed > $outFolder/$final_bed
 fi
@@ -284,15 +300,15 @@ then
     then
 	echo "Printing UCSC custom tracks for stranded protocol..."
 	cat $outFolder/$final_bed|sort -s -k6,6 -k1,1 -k2,2g -k3,3g|$scripts/cluster_reads.py -2 1> $outFolder/$clusters
-	cat $outFolder/$clusters | /home/mplass/programs/pk2bedGraph_info.pl -c 1,2,7,6 -s - -n "-_strand_"$name -d "Clusters on minus-strand" > $outFolder/"UCSC_m_"${f1%.*}".track"
-	cat $outFolder/$clusters | /home/mplass/programs/pk2bedGraph_info.pl -c 1,2,7,6 -s + -n "+_strand_"$name -d  "Clusters on plus-strand" > $outFolder/"UCSC_p_"${f1%.*}".track"
+	cat $outFolder/$clusters | $scripts/pk2bedGraph_info.pl -c 1,2,7,6 -s - -n "-_strand_"$name -d "Clusters on minus-strand" > $outFolder/"UCSC_m_"${f1%.*}".track"
+	cat $outFolder/$clusters | $scripts/pk2bedGraph_info.pl -c 1,2,7,6 -s + -n "+_strand_"$name -d  "Clusters on plus-strand" > $outFolder/"UCSC_p_"${f1%.*}".track"
 	
 	gzip $outFolder/"UCSC_m_"${f1%.*}".track"
 	gzip $outFolder/"UCSC_p_"${f1%.*}".track"
     else
 	echo "Printing UCSC custom track for strandless protocol..."
 	cat $outFolder/$final_bed |sort -s -k1,1 -k2,2g -k3,3g | $scripts/cluster_reads.py -s "+" -2 1> $outFolder/$clusters
-	cat $outFolder/$clusters | /home/mplass/programs/pk2bedGraph_info.pl -c 1,2,7,6 -s "+" -n $name -d "Clusters on both strands" > $outFolder/"UCSC_mp_"${f1%.*}".track"
+	cat $outFolder/$clusters | $scripts/pk2bedGraph_info.pl -c 1,2,7,6 -s "+" -n $name -d "Clusters on both strands" > $outFolder/"UCSC_mp_"${f1%.*}".track"
 	
 	gzip $outFolder/"UCSC_-+_"${f1%.*}".track"
     fi

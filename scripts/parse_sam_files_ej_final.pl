@@ -5,10 +5,8 @@
 ####################################################################################################
 
 use strict;
-use lib '/home/mplass/modules/';
-use Sequence;
-use Alignment;
-use General;
+use lib './resources/';
+use Pipeline_functions;
 use Getopt::Long;
 
 my $file   ="";
@@ -26,7 +24,7 @@ my $no_seq;
 	    'p=s'   => \$fasta,     ## path where the chr files are
 	    'c:f'   => \$cutoff,    ## cut off to define the uniquely mapped reads
 	    'm:f'   => \$maxcutoff, ## max cut off to select reads
-	    'o:s'   => \$bedout,    ## bed output file
+	    'o:s'   => \$bedout,    ## bed output file. 
 	    'r:s'   => \$remove,    ## list of IDs to be disregarded from the analysis
 	    'a'     => \$no_seq,    ## flag saying if the sequence and the CIGAR alignment should be printed
 	    'help'  => \$help,      ## help
@@ -77,7 +75,7 @@ else{
 ## define hash with IDs to be removed
 my %remove;
 unless ($remove  eq ""){
-    %remove = %{General::read_table($remove,0)};
+    %remove = %{Pipeline_functions::read_table($remove,0)};
 }
 
 
@@ -143,7 +141,7 @@ while (<$fh>){
     my $tstart =  $line[3];      ## target start	
     next if ($line[3] == 0);
 
-    my $cigar_line = Alignment::parse_cigar ($line[5]);    ## cigar_line (full)
+    my $cigar_line = Pipeline_functions::parse_cigar ($line[5]);    ## cigar_line (full)
     my $target_len = scalar (my @match=$cigar_line=~m/(S|D|M)/g);	
     if ($cigar_line=~m/^(S+)/){  ## recalculate "real" target start after soft clipping
 	my $start= length ($1);
@@ -185,8 +183,7 @@ while (<$fh>){
     if ($tstart > $exon1len || $tend <= $exon1len){
 	next;
     }
-    ###  chr8:-:74742616:74742707:74722765:74722864
-    ### chr16:-:70292883:70292982:70292021:70292120
+
     if ($gstrand eq "-"){
 	$gstart1= $genomic[3]+1 - $tend;
 	$gend1 =  $genomic[3]+1 - $tstart;
@@ -241,10 +238,10 @@ while (<$fh>){
 	}
 	
         ### recover the alignment between the read and the target read 
-	my @aln = Alignment::get_alignment_from_cigar($readseq,$tseq,$cigar_line);
+	my @aln = Pipeline_functions::get_alignment_from_cigar($readseq,$tseq,$cigar_line);
     
 	### make the extended cigar_line
-	my $newcigar =Alignment::get_extended_cigar (@aln, $cigar_line);
+	my $newcigar =Pipeline_functions::get_extended_cigar (@aln, $cigar_line);
     
 	### my get quality scores
 	my @stats = get_aligned_stats ($aln[0],$aln[1],$newcigar,$quality_scores,$final_strand);

@@ -18,7 +18,8 @@ file1=$BASE"/data/test_IMP_iCLIP_1.fastq"
 file2=$BASE"/data/test_IMP_iCLIP_2.fastq"
 file3=$BASE"/data/test_IMP_iCLIP_3.fastq"
 file4=$BASE"/data/test_IMP_iCLIP_4.fastq"
+file5=$BASE"/data/test_IMP_iCLIP_5.fastq"
 adapt="AGATCGGAAGAGCACACGTCTGAACTCCAGTCA"
-scripts/CAP.sh $file1 $adapt GGTT 5 1 1 1 1 1 1 test_iCLIP 0 1 1
+scripts/CAP.sh $file5 $adapt GGTT 5 1 1 1 1 2 1 test_iCLIP 1 8 1
 
 
