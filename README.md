@@ -12,11 +12,11 @@ Install Python (link https://www.python.org/)
 *Install GNU scientific library
 *Install zlib
 
-##Install bedTools
+### Install bedTools
 
-##Install pyicos
+### Install pyicos
 
-## Download mapping indexes and other file, unpack and copy to the folder CAP/resources
+### Download mapping indexes and other file, unpack and copy to the folder CAP/resources
 
 Set paths in scripts/CAP.sh 
 
