@@ -1,20 +1,24 @@
 CAP - Pipeline used to analyse CLIP-seq (specifically PAR-CLIP, HITS-CLIP and iCLIP) data.  
 
-## 1. REQUIREMENTS
-Linux shell with BASH and Python installed
+## 1. SYSTEM EQUIREMENTS
+Minimun 4 GB memory.
+Linux shell with BASH and some version of awk installed
 
 ## 2. INSTALL AND CONFIGURE
 Install Python (link https://www.python.org/)
 
-# Install bwa-pssm
+## Install bwa-pssm
+*Install bwa-PSSM
 *Install GNU scientific library
 *Install zlib
-*Install pyicos
 
-# check install script to identify possible problems
-Run python setup.py
+##Install bedTools
 
-Set paths in scripts/CAP.sh if they differ from default.
+##Install pyicos
+
+## Download mapping indexes and other file, unpack and copy to the folder CAP/resources
+
+Set paths in scripts/CAP.sh 
 
 Mapper:
 bwa-pssm
