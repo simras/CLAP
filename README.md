@@ -7,16 +7,13 @@ Linux shell with BASH and some version of awk installed
 ## 2. INSTALL AND CONFIGURE
 Install Python (link https://www.python.org/)
 
-## Install bwa-pssm
-*Install bwa-PSSM
-*Install GNU scientific library
-*Install zlib
+Install bwa-pssm (https://github.com/pkerpedjiev/bwa-pssm)
 
-### Install bedTools
+Install bedTools (http://bedtools.readthedocs.io/en/latest/)
 
-### Install pyicos
+Install pyicos (https://bitbucket.org/regulatorygenomicsupf/pyicoteo)
 
-### Download mapping indexes and other file, unpack and copy to the folder CAP/resources
+Download mapping indexes and other file, unpack and copy to the folder CAP/resources
 
 Set paths in scripts/CAP.sh 
 
