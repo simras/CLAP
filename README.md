@@ -16,18 +16,14 @@ Linux shell with BASH and some version of awk installed
 5. Download mapping indexes and other file, unpack and copy to the folder CAP/resources
 
 6. Set paths in scripts/CAP.sh 
-
-Mapper:
-bwa-pssm
-
-Mapping index
-Set minimum read length for the species in question
+   Mapper: bwa-pssm
+   Mapping index: Set minimum read length for the species in question
 
 
 ## 3. USAGE
-All scripts are provided as are, will not be maintained or supported.
+All scripts are provided as are and will not be maintained or supported.
 
-## 4. How TO CITE
+## 4. HOW TO CITE
 
 M Plass, SH Rasmussen and A Krogh. Highly accessible AU-rich regions in 3′ untranslated regions are hotspots for binding of proteins and miRNAs. PLOS Computational Biology (in review)
 
