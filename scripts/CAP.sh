@@ -106,6 +106,7 @@ scripts=$BASE"/scripts"
 bwa=$BASE/../bwa-pssm/bwa
 pyicos=pyicoclip
 
+
 if [ ${#12} -gt 0 ]
 then
     outFolder=$(pwd)/${11}"_"$pid

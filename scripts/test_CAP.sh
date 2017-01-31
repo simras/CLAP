@@ -19,7 +19,11 @@ file2=$BASE"/data/test_IMP_iCLIP_2.fastq"
 file3=$BASE"/data/test_IMP_iCLIP_3.fastq"
 file4=$BASE"/data/test_IMP_iCLIP_4.fastq"
 file5=$BASE"/data/test_IMP_iCLIP_5.fastq"
-adapt="AGATCGGAAGAGCACACGTCTGAACTCCAGTCA"
-scripts/CAP.sh $file5 $adapt GGTT 5 1 1 1 1 2 1 test_iCLIP 1 8 1
+file6=$BASE"/data/CLIP.sample.fastq"
+#file7=$BASE"/data/Hur_Muk_test.fastq"
+file7=$BASE"/data/nobc_assigned_SRR248532.fastq"
+
+adapt="TCGTATGCCGTCTTCTGCTTG"
+scripts/CAP.sh $file7 $adapt "" 0 1 2 1 1 2 0 test_Muk 1 8 1
 
 
