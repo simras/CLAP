@@ -28,39 +28,39 @@ scripts/CLAP.sh<BR>
 ARGUMENTS:<BR>
 $1: Filename<BR>
 $2: Remove adapters?<BR>
-&nbsp;0: No<BR>
-&nbsp;If all datasets have the same 3'adaptor just input the adaptor sequence, ex: ACCTGCA...<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;0: No<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;If all datasets have the same 3'adaptor just input the adaptor sequence, ex: ACCTGCA...<BR>
 $3: Sequence fixed barcode<BR>
 $4: length of random barcode<BR>
 $5: Remove duplicates?<BR>
-&nbsp;    0: No<BR>
-&nbsp;    1: Yes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;    0: No<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;    1: Yes<BR>
 $6: Type of analysis<BR>
-&nbsp;    1: fixed barcode, random barcodes<BR>
-&nbsp;    2: no fixed barcode, no random barcodes<BR>
-&nbsp;    3: only fixed barcode, no random barcodes<BR>
-&nbsp;    4: no fixed barcode, only random barcodes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;    1: fixed barcode, random barcodes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;    2: no fixed barcode, no random barcodes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;    3: only fixed barcode, no random barcodes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;    4: no fixed barcode, only random barcodes<BR>
 $7: UCSC Custom Tracks (bed tracks)<BR>
-&nbsp;    0: No UCSC custom tracks<BR>
-&nbsp;    1: UCSC custom tracks<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;    0: No UCSC custom tracks<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;    1: UCSC custom tracks<BR>
 $8: Stranded protocol?<BR>
-&nbsp;    0: Strandless<BR>
-&nbsp;    1: Stranded<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;    0: Strandless<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;    1: Stranded<BR>
 $9: Index<BR>
-&nbsp;    1: Genome index<BR>
-&nbsp;    2: Genome index + exon junction index<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;    1: Genome index<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;    2: Genome index + exon junction index<BR>
 $10: Model<BR>
-&nbsp;    0: Model T>C conversions (PAR-CLIP), conversion prob 0.125<BR>
-&nbsp;    1: No model (RNA-Seq, iCLIP or HITS-CLIP)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;    0: Model T>C conversions (PAR-CLIP), conversion prob 0.125<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;    1: No model (RNA-Seq, iCLIP or HITS-CLIP)<BR>
 $11: Output name<BR>
 $12: Quality scores<BR>
-&nbsp;    0: Phread 64<BR>
-&nbsp;    1: Phread 33<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;    0: Phread 64<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;    1: Phread 33<BR>
 $13: Number of threads?<BR>
-&nbsp;    Input number of threads<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;    Input number of threads<BR>
 $14: Peak calling?<BR>
-&nbsp;    0: No<BR>
-&nbsp;    1: Yes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;    0: No<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;    1: Yes<BR>
 
 Example runs:<BR>
 PAR-CLIP (substitution model and no barcodes)<BR>
