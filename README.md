@@ -1,4 +1,4 @@
-CAP - Pipeline used to analyse CLIP-seq (specifically PAR-CLIP, HITS-CLIP and iCLIP) data.  
+CLAP - Pipeline used to analyse CLIP-seq (specifically PAR-CLIP, HITS-CLIP and iCLIP) data.  
 
 ## 1. SYSTEM EQUIREMENTS
 Minimun 4 GB memory.
@@ -13,9 +13,9 @@ Linux shell with BASH and some version of awk installed
 
 4. Install pyicos (https://bitbucket.org/regulatorygenomicsupf/pyicoteo)
 
-5. Download mapping indexes and other files from (https://sid.erda.dk/share_redirect/FOATbg5v14), copy to the folder CAP, unpack and and merge with folder CAP/resources
+5. Download mapping indexes and other files from (https://sid.erda.dk/share_redirect/FOATbg5v14), copy to the folder CLAP, unpack and and merge with folder CLAP/resources
 
-6. Set paths in scripts/CAP.sh 
+6. Set paths in scripts/CLAP.sh 
    Mapper: bwa-pssm (find path of executable)
    Mapping index: Set minimum read length for the species in question
 
