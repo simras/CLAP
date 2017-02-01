@@ -21,9 +21,9 @@ file4=$BASE"/data/test_IMP_iCLIP_4.fastq"
 file5=$BASE"/data/test_IMP_iCLIP_5.fastq"
 file6=$BASE"/data/CLIP.sample.fastq"
 #file7=$BASE"/data/Hur_Muk_test.fastq"
-file7=$BASE"/data/nobc_assigned_SRR248532.fastq"
+file7=$BASE"/data/SRR248532.fastq"
 
 adapt="TCGTATGCCGTCTTCTGCTTG"
-scripts/CAP.sh $file7 $adapt "" 0 1 2 1 1 2 0 test_Muk 1 8 1
+scripts/CLAP.sh $file7 $adapt "" 0 1 2 1 1 2 0 test_Muk 1 8 1
 
 
