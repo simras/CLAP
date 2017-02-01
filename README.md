@@ -13,10 +13,10 @@ Linux shell with BASH and some version of awk installed
 
 4. Install pyicos (https://bitbucket.org/regulatorygenomicsupf/pyicoteo)
 
-5. Download mapping indexes and other file, unpack and copy to the folder CAP/resources
+5. Download mapping indexes and other files, unpack and copy to the folder CAP, unpack and make sure folder is called CAP/resources
 
 6. Set paths in scripts/CAP.sh 
-   Mapper: bwa-pssm
+   Mapper: bwa-pssm (find path of executable)
    Mapping index: Set minimum read length for the species in question
 
 
