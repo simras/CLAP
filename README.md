@@ -1,7 +1,7 @@
 CLAP - Pipeline used to analyse CLIP-seq (specifically PAR-CLIP, HITS-CLIP and iCLIP) data. The family of protocols where cross-linking immunoprecipitation coupled with high-throughput sequencing are called CLIP. They are used identify binding sites of RNA-binding proteins and exist in the different flavours mentioned above. The data produced by these protocols have different characteristics which are account for in this pipeline such that it can be used to process the above three versions and combination of them like iCLIP using 4SU nucleosides (PAR-iCLIP).
 
 ## 1. SYSTEM EQUIREMENTS
-A relatively powerful PC, minimun 4 GB memory and with Linux installed. The pipeline is tested on Ubuntu 16.04, in principle it should run on a stanard Linux setup with BASH Shell and some version of awk installed.
+A relatively powerful PC, minimun 4 GB memory and with Linux installed. The pipeline is tested on Ubuntu 16.04, in principle it should run on a standard Linux setup with BASH Shell and some version of awk installed.
 
 ## 2. STEPS OF INSTALLATION AND CONFIGURATION
 1. Install Python (link https://www.python.org/)
