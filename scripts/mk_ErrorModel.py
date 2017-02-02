@@ -18,10 +18,8 @@ def item(qual,base,obsBase,mutP):
     import math
     bg = [0.25,0.25,0.25,0.25]
     logC = 1/math.log(2)
-    # print log-scores
     return logC * math.log(sumProb(qual,base,obsBase,mutP)/bg[base2I(base)])
-#    print probabilities
-#    return sumProb(qual,base,obsBase)
+
 
 def base2I(base):
     if   base == "A":
@@ -46,6 +44,7 @@ def error(qual,f,to):
     
 def sumProb(qual,f,to,mutP):
     # sums the probabilities
+    # regularizing probability
     pr = 0.0000001
     for a in ["A","C","G","T"]:
         pr = pr + tTOc(f,a,mutP) * error(qual,a,to)
