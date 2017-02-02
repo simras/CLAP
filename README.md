@@ -28,7 +28,7 @@ ARGUMENTS:<BR>
 $1: Filename<BR>
 $2: Remove adapters?<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;0: No<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;If all datasets have the same 3'adaptor just input the adaptor sequence, ex: ACCTGCA...<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Input the adaptor sequence, ex: ACCTGCA...<BR>
 $3: Sequence fixed barcode<BR>
 $4: length of random barcode<BR>
 $5: Remove duplicates?<BR>
@@ -63,13 +63,13 @@ $14: Peak calling?<BR>
 
 Example runs:<BR>
 PAR-CLIP (substitution model and no barcodes)<BR>
-scripts/CLAP.sh <fastq-file> TCGTATGCCGTCTTCTGCTTG "" 0 1 2 1 1 2 0 <Analysis_name> 1 8 1<BR>
+scripts/CLAP.sh fastq-file TCGTATGCCGTCTTCTGCTTG "" 0 1 2 1 1 2 0 Analysis_name 1 8 1<BR>
 
 HITS-CLIP (no substitution model and no barcodes)<BR>
-scripts/CLAP.sh <fastq-file> TCGTATGCCGTCTTCTGCTTG "" 0 1 2 1 1 2 1 <Analysis_name> 1 8 1<BR>
+scripts/CLAP.sh fastq-file TCGTATGCCGTCTTCTGCTTG "" 0 1 2 1 1 2 1 Analysis_name 1 8 1<BR>
 
 iCLIP (with multiplexing and duplication barcodes)<BR>
-scripts/CLAP.sh <fastq-file> TCGTATGCCGTCTTCTGCTTG GGTT 5 1 1 1 1 2 1 <Analysis_name> 1 8 1<BR>
+scripts/CLAP.sh fastq-file TCGTATGCCGTCTTCTGCTTG GGTT 5 1 1 1 1 2 1 Analysis_name 1 8 1<BR>
 
 The default substitution model has a T to C conversion rate at 12,5 %. A substitution model with different conversion probability can be created with the script scripts/mk_errorModel.py or the more general script where conversions from and to any nucleotide can be specified (See the repository of BWA-PSSM). <BR>
 
