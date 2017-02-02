@@ -17,7 +17,6 @@ pipeline works on Apple computers, it could as they are based on FreeBSD, but we
 
 6. Set paths in scripts/CLAP.sh 
 Mapper: bwa-pssm (set path of executable) <BR>
-Mapping index: Set minimum read length for the species in question <BR>
 
 ## 3. USAGE
 All scripts are provided as are and will not be maintained or supported.<BR>
