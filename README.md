@@ -12,11 +12,11 @@ A relatively powerful PC, minimun 4 GB memory and with Linux installed. The pipe
 
 4. Install pyicos (https://bitbucket.org/regulatorygenomicsupf/pyicoteo)
 
-5. Download mapping indexes and other files from (https://sid.erda.dk/share_redirect/FOATbg5v14), copy to the folder CLAP, unpack and and merge with folder CLAP/resources
+5. Download mapping indexes and other files from (https://sid.erda.dk/share_redirect/FOATbg5v14), copy to the folder CLAP, unpack and and merge with folder CLAP/resources (it should happen automatically)
 
 6. Set paths in scripts/CLAP.sh 
 Mapper: bwa-pssm (set path of executable) <BR>
-Mapping index: Set minimum read length for the species in question
+Mapping index: Set minimum read length for the species in question <BR>
 
 ## 3. USAGE
 All scripts are provided as are and will not be maintained or supported.<BR>
@@ -71,7 +71,7 @@ scripts/CLAP.sh <fastq-file> TCGTATGCCGTCTTCTGCTTG "" 0 1 2 1 1 2 1 <Analysis_na
 iCLIP (with multiplexing and duplication barcodes)<BR>
 scripts/CLAP.sh <fastq-file> TCGTATGCCGTCTTCTGCTTG GGTT 5 1 1 1 1 2 1 <Analysis_name> 1 8 1<BR>
 
-The default substitution model has a T to C conversion rate at 12,5 % a substitution model with different frequency can be created with the script mk_error_model.py or the more general script from the repository of BWA-PSSM.
+The default substitution model has a T to C conversion rate at 12,5 % a substitution model with different frequency can be created with the script mk_error_model.py or the more general script from the repository of BWA-PSSM. <BR>
 
 ## 4. HOW TO CITE<BR>
 M Plass, SH Rasmussen and A Krogh. Highly accessible AU-rich regions in 3′ untranslated regions are hotspots for binding of proteins and miRNAs. PLOS Computational Biology (in review)<BR>
