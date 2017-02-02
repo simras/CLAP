@@ -71,6 +71,8 @@ scripts/CLAP.sh <fastq-file> TCGTATGCCGTCTTCTGCTTG "" 0 1 2 1 1 2 1 <Analysis_na
 iCLIP (with multiplexing and duplication barcodes)<BR>
 scripts/CLAP.sh <fastq-file> TCGTATGCCGTCTTCTGCTTG GGTT 5 1 1 1 1 2 1 <Analysis_name> 1 8 1<BR>
 
+The default substitution model has a T to C conversion rate at 12,5 % a substitution model with different frequency can be created with the script mk_error_model.py or the more general script from the repository of BWA-PSSM.
+
 ## 4. HOW TO CITE<BR>
 M Plass, SH Rasmussen and A Krogh. Highly accessible AU-rich regions in 3′ untranslated regions are hotspots for binding of proteins and miRNAs. PLOS Computational Biology (in review)<BR>
 
