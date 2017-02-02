@@ -1,5 +1,5 @@
 #!/usr/bin/python
-#   mk_ErrorModel.py
+#   mk_ErrorModel.py -m 0.12
 #   Example 
 #   By Simon H. Rasmussen
 #   Bioinformatics Centre
@@ -69,7 +69,7 @@ def tTOc(f,to,mutP):
 if __name__ == "__main__":
     from optparse import OptionParser
     parser = OptionParser()
-    parser.add_option("-m", action="store", type="float",    dest="mutP",   default=0,  help="P(\"t\"|\"c\"): t to c mutation probability")
+    parser.add_option("-m", action="store", type="float",    dest="mutP",   default=0.12,  help="P(\"t\"|\"c\"): t to c mutation probability")
 
 
     (options, args) = parser.parse_args()
