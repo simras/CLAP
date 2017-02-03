@@ -4,7 +4,7 @@ CLIP Analysis Pipeline - CLAP, is used to analyse CLIP-seq (specifically PAR-CLI
 A relatively powerful PC, minimun 4 GB memory and with Linux installed. The pipeline is tested on Ubuntu 16.04, in principle it should run on a standard Linux setup with BASH Shell and some version of awk installed. We will not guarantee that the
 pipeline works on Apple computers, it could as they are based on FreeBSD, but we provide no support to the end of making it run on a Mac.
 
-## 2. STEPS OF INSTALLATION AND CONFIGURATION
+## 2. INSTALLATION AND CONFIGURATION
 1. Install Python (link https://www.python.org/)
 
 2. Install bwa-pssm (https://github.com/pkerpedjiev/bwa-pssm)
