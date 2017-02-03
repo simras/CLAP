@@ -25,7 +25,7 @@ scripts/CLAP.sh<BR>
 
 14 options have to be specified in the sequence presented in the help menu.<BR>
 ARGUMENTS:<BR>
-  $1: Filename<BR>
+    $1: Filename<BR>
   $2: Remove adapters?<BR>
   &nbsp;&nbsp;&nbsp;&nbsp;0: No<BR>
   &nbsp;&nbsp;&nbsp;&nbsp;Input the adaptor sequence, ex: ACCTGCA...<BR>
