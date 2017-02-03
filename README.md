@@ -63,6 +63,7 @@ ARGUMENTS:<BR>
         1: Yes
 
 Example analyses:
+
     PAR-CLIP (substitution model and no barcodes)
     scripts/CLAP.sh fastq-file TCGTATGCCGTCTTCTGCTTG "" 0 1 2 1 1 2 0 Analysis_name 1 8 1
 
