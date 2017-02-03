@@ -25,12 +25,12 @@ scripts/CLAP.sh<BR>
 
 14 options have to be specified in the sequence presented in the help menu.<BR>
 ARGUMENTS:<BR>
-$1: Filename<BR>
-$2: Remove adapters?<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;0: No<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;Input the adaptor sequence, ex: ACCTGCA...<BR>
-$3: Sequence fixed barcode<BR>
-$4: length of random barcode<BR>
+  $1: Filename<BR>
+  $2: Remove adapters?<BR>
+  &nbsp;&nbsp;&nbsp;&nbsp;0: No<BR>
+  &nbsp;&nbsp;&nbsp;&nbsp;Input the adaptor sequence, ex: ACCTGCA...<BR>
+  $3: Sequence fixed barcode<BR>
+  $4: length of random barcode<BR>
 $5: Remove duplicates?<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;    0: No<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;    1: Yes<BR>
