@@ -20,8 +20,9 @@ Mapper: bwa-pssm (set path of executable) <BR>
 
 ## 3. USAGE
 All scripts are provided as are and will not be maintained or supported.<BR>
-To get a help menu run:<BR>
-scripts/CLAP.sh<BR>
+To get a help menu run:
+        
+        scripts/CLAP.sh
 
 14 options have to be specified in the sequence presented in the help menu.<BR>
 ARGUMENTS:<BR>
