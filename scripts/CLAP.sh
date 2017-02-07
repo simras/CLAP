@@ -7,14 +7,6 @@
 #  University of Copenhagen
 #
 ####################################################################################################
-# COMMENTS:
-# Phread 33 option not tested. UPDATE: I wonder if it is or not...
-# Adaptor alphabet {ACGTacgt} no other IUPAC like N in the sequence.
-# How do we share all of our custom data?
-# How do we integrate peak calling?
-# What should we do with genome annotation, index and sequences.
-# Does our genome have Y-chromosome? it should have to be general.
-# I wonder about the fundamental setup in this script. Is it for analyzing one or multiple datasets at a time???
 ####################################################################################################
 
 trap "" 1
@@ -264,7 +256,7 @@ then
 	    # not stranded
 	    $pyicos -f 'bed' -F 'bed_pk'  --p-value 0.01 --region $exon_annot $outFolder/$peak_in $outFolder/$peak_out 
 	fi
-	#    # not stranded
+	# not stranded
     fi
 fi
 
@@ -279,8 +271,9 @@ then
     #peak_out2=$map_exon.pk
 
     cat $outFolder/$map_reads.bed $outFolder/$map_exon.bed > $outFolder/$peak_in
-    rm $outFolder/$map_reads.bed $outFolder/$map_exon.bed 
- 
+#    head  $outFolder/$map_exon.bed
+    #rm $outFolder/$map_reads.bed $outFolder/$map_exon.bed 
+    
     if [ ${14} -ne 0 ]
     then
 	if [ $8 -eq 0 ]
@@ -290,7 +283,7 @@ then
 	    # not stranded
 	    $pyicos -f 'bed' -F 'bed_pk' --p-value  0.01 --region $exon_annot $outFolder/$peak_in $outFolder/$peak_out 
 	fi
-	#    # not stranded
+	# not stranded
     fi
     
     # Merge reads from genome and exon junctions
