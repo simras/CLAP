@@ -23,7 +23,7 @@ To test that everything works, run:
 
         CLAP/testCLAP.sh
 
-It maps, does peak calling and produces and UCSC custom track from reads that map to chr4 from the PAR-CLIP dataset SRR248532.
+It maps, does peak calling and produces a UCSC custom track from reads that map to chr4 in the PAR-CLIP dataset SRR248532.
 
 ## 4. USAGE
 All scripts are provided as are and will not be maintained or supported.<BR>
