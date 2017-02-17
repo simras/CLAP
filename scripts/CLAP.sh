@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#  CAP - CLIP Analysis Pipeline
+#  CLAP - CLIP Analysis Pipeline
 # 
 #  Simon H. Rasmussen and Mireya Plass
 #  Bioinformatics Centre
