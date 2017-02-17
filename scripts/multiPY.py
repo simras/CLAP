@@ -27,7 +27,7 @@ def multiPY(in_file,command, lines_in_record, procs,batchSize=100000,err=False):
         t = []
         for j in range(procs):
             lines = ""
-            ## Popen write out batchSize lines to file
+            ## write out batchSize lines to file
             for l in range(lines_in_record * batchSize):
                 if fil:
                     line = inF.readline()
@@ -41,10 +41,10 @@ def multiPY(in_file,command, lines_in_record, procs,batchSize=100000,err=False):
             if lines != "":
                 t.append(threading.Thread(target=thread_it,args=[j,stopi,lines,command,lines_in_record,err,ran]))
                 t[j].start()
-            #print "Indices ",k, j
             if stop:
                 break
         k = k + 1
+        # Write out in same order as input data lines
         for j in range(len(t)):
             t[j].join()
             out_file_name = "out_file_" + ran + "_" + str(j) + ".txt" 
@@ -55,14 +55,15 @@ def multiPY(in_file,command, lines_in_record, procs,batchSize=100000,err=False):
                 print l,
             out_file.close()
             
-#    print "Clean up"
+    # Cleanup
     for j in range(procs):
         tmp_file_name = "tmp_file_" +  ran + "_" + str(j) + ".txt" 
         os.system("rm " + tmp_file_name + " 2> /dev/null")
         out_file_name = "out_file_" +  ran + "_" + str(j) + ".txt" 
         os.system("rm " + out_file_name + " 2> /dev/null")
-
+        
 def thread_it(j,stopi,lines,command,lines_in_record,err,ran):
+    # Create subprocesses
     import subprocess
     import random
     if j > stopi:
