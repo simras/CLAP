@@ -82,9 +82,6 @@ if __name__ == "__main__":
     parser.add_option("-l", action="store", type="int",    dest="lines",   default=0,  help="Number of lines in one recored") 
     parser.add_option("-b", action="store", type="int",    dest="batchSize",   default=100000,  help="Batch Size") 
     parser.add_option("-p", action="store", type="int",    dest="procs",   default=0,  help="Number of processes")
-    #    parser.add_option("-p", action="store", type="string", dest="patt", default="", help="pattern") 
-    #   parser.add_option("-l", action="store", type="string", dest="label", default="x", help="pattern")
-#    parser.add_option("-o", action="store", type="string", dest="out_file", default="", help="output File")
     parser.add_option("-c", action="store", type="string", dest="command", default="", help="Command")
     parser.add_option("-e", action="store_true", dest="err", default=False, help="Suppress std. error")
 
