@@ -4,7 +4,7 @@
 #   By Simon H. Rasmussen
 #   Bioinformatics Centre
 #   University of Copenhagen
-#   Implement batch processing
+#   Implementation of multiprocess batch processing
 
 import os
 import sys
