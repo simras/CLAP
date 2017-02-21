@@ -18,14 +18,16 @@ pipeline works on Apple computers, it could as they are based on FreeBSD, but we
 6. Set paths in scripts/CLAP.sh 
 Mapper: bwa-pssm (set path of executable) <BR>
 
-## 3. TEST-EXAMPLE
+## 3. INSTALLATION AND CONFIGURATION
+
+## 4. TEST-EXAMPLE
 To test that everything works, run:
 
         CLAP/testCLAP.sh
 
 It maps, does peak calling and produces a UCSC custom track from reads that map to chr4 in the PAR-CLIP dataset SRR248532.
 
-## 4. USAGE
+## 5. USAGE
 All scripts are provided as are and will not be maintained or supported.<BR>
 To get a help menu run:
         
@@ -83,8 +85,8 @@ Example analyses:
 
 The default substitution model has a T to C conversion rate at 12,5 %. A substitution model with different conversion probability can be created with the script scripts/mk_errorModel.py or the more general script where conversions from and to any nucleotide can be specified (See the repository of BWA-PSSM). <BR>
 
-## 5. HOW TO CITE<BR>
+## 6. HOW TO CITE<BR>
 M Plass, SH Rasmussen and A Krogh. Highly accessible AU-rich regions in 3′ untranslated regions are hotspots for binding of proteins and miRNAs. PLOS Computational Biology (in review)<BR>
 
-## 6. LICENSE<BR>
+## 7. LICENSE<BR>
 Copyright (c) 2017, Simon H. Rasmussen. The software is open source and released under the MIT license.
