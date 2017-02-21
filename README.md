@@ -18,7 +18,7 @@ pipeline works on Apple computers, it could as they are based on FreeBSD, but we
 6. Set paths in scripts/CLAP.sh 
 Mapper: bwa-pssm (set path of executable) <BR>
 
-## 3. CHANGING SPECIES OR ANNOTATION
+## 3. FURTHER CONFIGURATION
 Currently the pipeline is set up with an hg19 assemly and a processed ENSEMBL annotation. If one wished to analyze data from a different species or use a different annotation it has to be integrated following a number of steps. The scripts we provide assumes an ENSEMBL annotation GTF file, it will most likely not work with other types of anotation.
 
 Updating annotation
@@ -26,7 +26,7 @@ Updating annotation
 
 2. Process annotation to bed-file
 
-scripts/create_mRNA_genome_annotation3.pl 
+        scripts/create_mRNA_genome_annotation3.pl <GFF-file> <OUTPUT-NAME>
 
 
 
