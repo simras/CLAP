@@ -26,7 +26,7 @@ Updating annotation
 
 2. Process annotation to bed-file
 
-        scripts/create_mRNA_genome_annotation3.pl <GFF-file> <OUTPUT-NAME>
+        scripts/create_mRNA_genome_annotation3.pl <GFF-file> <OUTPUT-FILE>
 
 
 
