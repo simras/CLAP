@@ -18,7 +18,14 @@ pipeline works on Apple computers, it could as they are based on FreeBSD, but we
 6. Set paths in scripts/CLAP.sh 
 Mapper: bwa-pssm (set path of executable) <BR>
 
-## 3. INSTALLATION AND CONFIGURATION
+## 3. CHANGING SPECIES OR ANNOTATION
+Currently the pipeline is set up with an hg19 assemly and a processed ENSEMBL annotation. If one wished to analyze data from a different species or use a different annotation it has to be integrated following a number of steps. The scripts we provide assumes an ENSEMBL annotation GTF file, it will most likely not work with other types of anotation.
+
+1. Download ENSEMBL annotation
+
+2. Process annotation to bed-file
+
+3. 
 
 ## 4. TEST-EXAMPLE
 To test that everything works, run:
