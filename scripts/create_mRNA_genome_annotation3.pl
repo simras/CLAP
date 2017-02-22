@@ -1,5 +1,6 @@
 #!/usr/bin/perl -w
 use strict;
+use Data::Dumper;
 
 if (@ARGV != 2){
     print "introduce the gff file with the ensembl annotation and the output prefix\n";
@@ -16,7 +17,7 @@ while (<ARX>){
     my @l = split;
     next unless ($l[2] eq "exon" || $l[2] eq "CDS");
     
-    my $exon = read_ensembl81_gtf($_);
+    my $exon = read_ensembl87_gtf($_);
     if ($exon -> {"type"} eq "exon"){
 	push (@{$genes{$exon->{"chr"}}{$exon->{"transcript_id"}}{"exons"}}, $exon);
     }
@@ -294,26 +295,73 @@ sub print_func{
     }
 }
 
-
-sub read_ensembl81_gtf{
+sub read_ensembl87_gtf{
+    
     my $string = shift;
     my %hash;
-    my @line = split(/\t/, $string);
+    my @line = split("\t",$string);
+    
     $hash{"chr"} = $line[0];
-    $hash{"biotype"} = $line[23];
-    $hash{"biotype"} =~s/\"|;//g;
     $hash{"type"} = $line[2];
     $hash{"start"} = $line[3];
     $hash{"end"} = $line[4];
     $hash{"score"} = $line[5];
     $hash{"strand"} = $line[6];
     $hash{"frame"} = $line[7];
-    $hash{"gene_id"} = $line[9];
-    $hash{"gene_id"} =~s/\"|;//g; 
-    $hash{"gene_name"} = $line[19];
-    $hash{"gene_name"} =~s/\"|;//g;
-    $hash{"transcript_id"} = $line[13];
-    $hash{"transcript_id"} =~s/\"|;//g;
-
+ #   print $string, "\n";
+    my $parent_line = $line[8];
+    $hash{"gene_id"} = $string; 
+    $hash{"gene_id"} =~ /(gene_id.")([A-Z0-9]+)/;
+    $hash{"gene_id"} = $2;
+    $hash{"gene_name"} = $string; 
+    $hash{"gene_name"} =~ /(gene_name.")([_A-Za-z0-9\.\/-]+)/;
+    $hash{"gene_name"} = $2;
+    $hash{"biotype"} = $string;
+    $hash{"biotype"} =~ /(gene_biotype.")([A-Za-z0-9_]+)/;
+    $hash{"biotype"} = $2;
+    $hash{"transcript_id"} = $string;
+    $hash{"transcript_id"} =~ /(transcript_id.")([A-Z0-9]+)/;
+    $hash{"transcript_id"} = $2;
+#    print Dumper(\%hash);
+    return \%hash;
+}
+sub read_ensembl86_gtf{
+    #use Data::Dumper;
+   #my $string = shift;
+    # my @line = split;
+    my @line = split;
+    my %hash;
+ #   my @line = split($string);
+    $hash{"chr"} = $line[0];
+    $hash{"type"} = $line[2];
+    $hash{"start"} = $line[3];
+    $hash{"end"} = $line[4];
+    $hash{"score"} = $line[5];
+    $hash{"strand"} = $line[6];
+    $hash{"frame"} = $line[7];
+   
+    for (my $i = 8; $i < @line-1; $i++){
+    if ($line[$i] eq "gene_id"){
+        $hash{"gene_id"} = $line[$i+1];
+        $hash{"gene_id"} =~s/\"|;//g;
+        $i++;
+    }
+    elsif ($line[$i] eq "transcript_id"){
+        $hash{"transcript_id"} = $line[$i+1];
+        $hash{"transcript_id"} =~s/\"|;//g;
+        $i++;
+    }
+    elsif ($line[$i] eq "gene_name"){
+        $hash{"gene_name"} = $line[19];
+        $hash{"gene_name"} =~s/\"|;//g;
+        $i++;
+    }
+    elsif ($line[$i] eq "gene_biotype"){
+        $hash{"biotype"} = $line[$i+1];
+        $hash{"biotype"} =~s/\"|;//g;
+        $i++;
+    }
+    }
+#    print Dumper(\%hash);
     return \%hash;
 }
