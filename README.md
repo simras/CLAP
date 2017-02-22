@@ -23,7 +23,14 @@ Currently the pipeline is set up with an hg19 assemly and a processed ENSEMBL an
 
 Updating annotation
 1. Download ENSEMBL annotation
+        
+        # for newest human assembly 
+        wget ftp://ftp.ensembl.org/pub/release-87/gff3/homo_sapiens/Homo_sapiens.GRCh38.87.gff3.gz
 
+2. Unzip the gff3 file
+
+        gunzip Homo_sapiens.GRCh38.87.gff3.gz
+        
 2. Process annotation to bed-file
 
         scripts/create_mRNA_genome_annotation3.pl <GFF-file> <OUTPUT-FILE>
