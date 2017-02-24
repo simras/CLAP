@@ -48,7 +48,20 @@ Process fasta file Such that there is only one record for each chromosomes and m
 
 >1, >2, >3, >4, >5, >6, >7, >8, >9, >10, >11, >12, >13, >14, >15, >16, >17, >18, >19, >X, >Y and >MT
 
-NOT FINISHED
+Configure the pipeline such that your annotation and sequence file will be used (open scripts/CLAP.sh)
+
+Correct lines:
+
+Processed and tested annotation and sequence files can be found here
+
+Mus Musculus
+        <share-link>
+Homo Sapianst
+        <share-link>
+D Malanogastor
+        <share-link>
+C. Elegans
+        <share-link>
 
 ## 4. TEST-EXAMPLE
 To test that everything works, run:
