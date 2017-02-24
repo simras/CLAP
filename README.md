@@ -44,7 +44,9 @@ Unzip the fasta
 
         gunzip Mus_musculus.GRCm38.dna.primary_assembly.fa.gz
 
-Process fasta file
+Process fasta file Such that there is only one record for each chromosomes and mitochrondrion, named (for mouse):
+
+>1, >2, >3, >4, >5, >6, >7, >8, >9, >10, >11, >12, >13, >14, >15, >16, >17, >18, >19, >X, >Y and >MT
 
 NOT FINISHED
 
