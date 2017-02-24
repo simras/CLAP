@@ -23,8 +23,8 @@ Currently the pipeline is set up with an hg19 assemly and a processed ENSEMBL an
 
 Updating annotation:
 1. Download ENSEMBL annotation
+# for newest Mouse assembly 
         
-        # for newest Mouse assembly 
         wget ftp://ftp.ensembl.org/pub/release-87/gtf/mus_musculus/Mus_musculus.GRCm38.87.chr.gtf.gz
 
 2. Unzip the gtf file
