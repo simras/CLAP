@@ -55,12 +55,19 @@ Correct lines:
 Processed and tested annotation and sequence files can be found here
 
 Mus Musculus
+
         <share-link>
+
 Homo Sapianst
+
         <share-link>
+
 D Malanogastor
+
         <share-link>
+
 C. Elegans
+
         <share-link>
 
 ## 4. TEST-EXAMPLE
