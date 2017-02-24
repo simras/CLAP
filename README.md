@@ -37,10 +37,12 @@ Updating annotation:
 
 Getting sequence Files:
 1. Dwonload sequence file
-wget ftp://ftp.ensembl.org/pub/release-87/fasta/mus_musculus/dna/Mus_musculus.GRCm38.dna.primary_assembly.fa.gz
+
+        wget ftp://ftp.ensembl.org/pub/release-87/fasta/mus_musculus/dna/Mus_musculus.GRCm38.dna.primary_assembly.fa.gz
 
 2. Unzip the fasta
-gunzip Mus_musculus.GRCm38.dna.primary_assembly.fa.gz
+
+        gunzip Mus_musculus.GRCm38.dna.primary_assembly.fa.gz
 
 3. Process fasta file
 
