@@ -35,7 +35,7 @@ Process annotation to bed-file
 
         scripts/create_mRNA_genome_annotation3.pl <GTF-file> <OUTPUT-FILE>
 
-### Getting sequence Files:
+### Getting sequence files:
 Dwonload sequence file
 
         wget ftp://ftp.ensembl.org/pub/release-87/fasta/mus_musculus/dna/Mus_musculus.GRCm38.dna.primary_assembly.fa.gz
