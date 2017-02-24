@@ -35,6 +35,9 @@ Process annotation to bed-file
 
         scripts/create_mRNA_genome_annotation3.pl <GTF-file> <OUTPUT-FILE>
 
+### Make exon junction annotation:
+
+
 ### Getting sequence files:
 Dwonload sequence file
 
@@ -51,6 +54,10 @@ Process fasta file Such that there is only one record for each chromosomes and m
 Configure the pipeline such that your annotation and sequence file will be used (open scripts/CLAP.sh)
 
 Correct lines:
+
+        idx1=$BASE"/resources/hg19.fa"
+        exon_annot=$BASE"/resources/ensembl70.all.long_nooverlap.txt"
+        idx3=$BASE"/resources/ensembl70_ej.fa"
 
 Processed and tested annotation and sequence files can be found here
 
