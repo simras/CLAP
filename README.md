@@ -21,7 +21,7 @@ Mapper: bwa-pssm (set path of executable) <BR>
 ## 3. FURTHER CONFIGURATION
 Currently the pipeline is set up with an hg19 assemly and a processed ENSEMBL annotation. If one wished to analyze data from a different species or use a different annotation it has to be integrated following a number of steps. The scripts we provide assumes an ENSEMBL annotation GTF file, it will most likely not work with other types of anotation.
 
-Updating annotation:
+### Updating annotation:
 
 Download ENSEMBL annotation (here the newest Mouse assembly) 
         
@@ -35,7 +35,7 @@ Process annotation to bed-file
 
         scripts/create_mRNA_genome_annotation3.pl <GTF-file> <OUTPUT-FILE>
 
-# Getting sequence Files:
+### Getting sequence Files:
 Dwonload sequence file
 
         wget ftp://ftp.ensembl.org/pub/release-87/fasta/mus_musculus/dna/Mus_musculus.GRCm38.dna.primary_assembly.fa.gz
