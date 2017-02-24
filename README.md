@@ -33,10 +33,11 @@ Unzip the gtf file
         
 Process annotation to bed-file
 
-        scripts/create_mRNA_genome_annotation3.pl <GTF-file> <OUTPUT-FILE>
+        scripts/create_mRNA_genome_annotation3.pl <GTF-file> Ensembl_mouse_87.bed
 
 ### Make exon junction annotation:
 
+make_exon_junction_library.pl Ensembl_mouse_87.bed
 
 ### Getting sequence files:
 Dwonload sequence file
