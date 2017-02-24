@@ -97,6 +97,11 @@ bwa=$BASE/../bwa-pssm/bwa
 #Pyicos Path
 pyicos=pyicoclip
 
+# Mapping index location
+idx1=$BASE"/resources/hg19.fa"
+exon_annot=$BASE"/resources/ensembl70.all.long_nooverlap.txt"
+idx3=$BASE"/resources/ensembl70_ej.fa"
+
 if [ ${#12} -gt 0 ]
 then
     outFolder=$(pwd)/${11}"_"$pid
@@ -107,12 +112,7 @@ fi
 mkdir $outFolder
 trap "echo $outFolder" 0
 #exec 1> $outFolder/mapping_pipe.log
-#exec 2>&1
-
-# Mapping index location
-idx1=$BASE"/resources/hg19.fa"
-#idx2=$BASE"/indexes/bwa-pssm-exon/exons_ENS_70_collapsed_newIDs_2.fa"
-idx3=$BASE"/resources/ensembl70_ej.fa"	    
+#exec 2>&1    
 
 # Min read length - species dependent
 length=20
@@ -237,7 +237,6 @@ then
     $BASE/scripts/parse_sam_files_ej_final.pl -p $idx3 -t pssm -c $PP -f $outFolder/$map_exon.sam -o $outFolder/$map_exon.bed -a
 fi
 # peak Calling
-exon_annot=$BASE"/resources/ensembl70.all.long_nooverlap.txt"
 #exon_annot="/seqdata/krogh/mplass/RBPs/FDR/ensembl70.long.exons.txt"
 
 if [ $9 -eq 1 ]
