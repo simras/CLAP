@@ -37,7 +37,7 @@ Process annotation to bed-file
 
 ### Make exon junction annotation:
 
-make_exon_junction_library.pl Ensembl_mouse_87.bed
+make_exon_junction_library.pl Ensembl_mouse_87.bed.all.txt mmu10.fa
 
 ### Create exon junction sequences
 
