@@ -70,8 +70,8 @@ Change lines:
 Assuming the annotation and sequence files have been moved to resource folder, swap lines by
 
         idx1=$BASE"/resources/mmu10.fa"
-        exon_annot=$BASE"/resources/ensembl89_mmu.all.txt"
-        idx3=$BASE"/resources/ensembl87_mmu_ej.fa"
+        exon_annot=$BASE"/resources/Ensembl_mouse_87.bed.all.txt"
+        idx3=$BASE"/resources/ensembl_87_mmu_ej.fa"
 
 Processed and tested annotation and sequence files can be found here
 
