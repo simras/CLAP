@@ -39,6 +39,10 @@ Process annotation to bed-file
 
 make_exon_junction_library.pl Ensembl_mouse_87.bed
 
+### Create exon junction sequences
+
+MISSING (BedTools getFasta Ensembl_mouse_87.bed.all.txt)
+
 ### Getting sequence files:
 Dwonload sequence file
 
@@ -51,14 +55,23 @@ Unzip the fasta
 Process fasta file Such that there is only one record for each chromosomes and mitochrondrion, named (for mouse):
 
         >1, >2, >3, >4, >5, >6, >7, >8, >9, >10, >11, >12, >13, >14, >15, >16, >17, >18, >19, >X, >Y and >MT
+        
+        scripts/process_genomic_sequence_file.pl Mus_musculus.GRCm38.dna.primary_assembly.fa \              
+        "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,X,Y,MT" > mmu10.fa
 
-Configure the pipeline such that your annotation and sequence file will be used (open scripts/CLAP.sh)
+### Configure the pipeline such that your annotation and sequence file will be used (open scripts/CLAP.sh)
 
-Correct lines:
+Change lines:
 
         idx1=$BASE"/resources/hg19.fa"
         exon_annot=$BASE"/resources/ensembl70.all.long_nooverlap.txt"
         idx3=$BASE"/resources/ensembl70_ej.fa"
+
+Assuming the annotation and sequence files have been moved to resource folder, swap lines by
+
+        idx1=$BASE"/resources/mmu10.fa"
+        exon_annot=$BASE"/resources/ensembl89_mmu.all.txt"
+        idx3=$BASE"/resources/ensembl87_mmu_ej.fa"
 
 Processed and tested annotation and sequence files can be found here
 
