@@ -74,8 +74,13 @@ foreach my $id (keys %junctions){
 	    }
 	}
     }
+    # Convert to closed coordinates
+    $segments[0] = $segments[0] - 1;
+    $segments[2] = $segments[2] - 1;
 
+    # Convert mitochodrial chromosome annotation
     $chr=~s/MT/M/;
+
     print T join ("\t", $chr,$segments[0],$segments[1],".",".",$strand), "\n";
     print T join ("\t", $chr,$segments[2],$segments[3],".",".",$strand), "\n";
     
@@ -97,12 +102,13 @@ close (T);
 
 my $seqfile= "out.".$$.".tab";
 my @seqs;
-my $command = "bedtools getfasta -fi $genome_file -bed $bedfile -tab -fo $seqfile -s";
+my $command = "../bedtools2/bin/bedtools getfasta -fi $genome_file -bed $bedfile -tab -fo $seqfile -s";
 
 system ("$command");
 unlink ($bedfile);
 
 open (SEQ, "<$seqfile") || die ("cannot open $seqfile for reading");
+
 while (<SEQ>){
     chomp;
     my @line = split;

@@ -3,7 +3,9 @@
 #   Simon H. Rasmussen
 #   Bioinformatics Centre
 #   Unversity of Copenhagen
-############################   
+############################
+#   Developed for Ensembl ver. 87
+#   Tested on species: hsa, mmu, dme and cel   
 
 use strict;
 use warnings;
@@ -24,16 +26,24 @@ while (<ARX>){
     #if ($_ =~ m/^>[0-9MTXY]+ /){
     chomp;
     @l = split;
-    #print "XX $l[0], \n";
-    if($_ =! m/^>/){
-	if($p){
+    if($_ !~ m/^>/){
+	#print "XX1 $l[0]\n";
+	if($p == 1){
+	#print "XX2 $l[0]\n";
+	    
 	    # Sequence lines we wanna print
 	    print "$l[0]\n"; 
-	}
+	}#else{
+	 #   print "XX3 $l[0]\n";
+	#}	
     }elsif(match($l[0], @m_list)){
 	# records  we wanna print
 	$p = 1;
-	print "$l[0]\n";
+        # rename mitochondrial chromosome MT -> M
+	$l[0] =~ s/MT/M/g;
+	# rename chromosome records to >chr1, chr2, ... , from >1, >2,...
+	(my $chr = $l[0]) =~ s/>/>chr/g;
+	print "$chr\n";
     }elsif ($_ =~ m/^>/){
 	# records we don't wanna print
 	$p=0;
@@ -50,6 +60,7 @@ sub match {
     my @l = splice(@_,0,$#_ + 1);
     foreach my $ll (@l){
 	if("$name" eq ">$ll"){
+	    #print "$name == >$ll\n";
 	    return 1;
         }
     }
