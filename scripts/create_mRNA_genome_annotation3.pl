@@ -3,7 +3,7 @@ use strict;
 use Data::Dumper;
 
 if (@ARGV != 2){
-    print "introduce the gff file with the ensembl annotation and the output prefix\n";
+    print "introduce the gtf file with the ensembl annotation and the output prefix\n";
     print "\nUSAGE. ./create_mRNA_genome_annotation.pl ensembl.gff output\n\n";
     exit (1);
 }
