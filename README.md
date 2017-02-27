@@ -33,15 +33,11 @@ Unzip the gtf file
         
 Process annotation to bed-file
 
-        scripts/create_mRNA_genome_annotation3.pl <GTF-file> Ensembl_mouse_87.bed
+        scripts/create_mRNA_genome_annotation3.pl <GTF-file> resources/Ensembl_mouse_87.bed
 
-### Make exon junction annotation:
+### Make exon junction sequence file:
 
-make_exon_junction_library.pl Ensembl_mouse_87.bed.all.txt mmu10.fa
-
-### Create exon junction sequences
-
-MISSING (BedTools getFasta Ensembl_mouse_87.bed.all.txt)
+        scripts/make_exon_junction_library.pl resources/Ensembl_mouse_87.bed.all.txt mmu10.fa 1> resources/Ensembl_mouse_87_ej.fa
 
 ### Getting sequence files:
 Dwonload sequence file
@@ -57,7 +53,7 @@ Process fasta file Such that there is only one record for each chromosomes and m
         >1, >2, ..., >X, >Y and >MT
         
         scripts/process_genomic_sequence_file.pl Mus_musculus.GRCm38.dna.primary_assembly.fa \              
-        "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,X,Y,MT" > mmu10.fa
+        "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,X,Y,MT" > resources/mmu10.fa
 
 ### Configure the pipeline such that your annotation and sequence file will be used (open scripts/CLAP.sh)
 
@@ -71,7 +67,7 @@ Assuming the annotation and sequence files have been moved to resource folder, s
 
         idx1=$BASE"/resources/mmu10.fa"
         exon_annot=$BASE"/resources/Ensembl_mouse_87.bed.all.txt"
-        idx3=$BASE"/resources/ensembl_87_mmu_ej.fa"
+        idx3=$BASE"/resources/ensembl_87_mouse_ej.fa"
 
 Processed and tested annotation and sequence files can be found here
 
@@ -79,15 +75,15 @@ Mus Musculus
 
         <share-link>
 
-Homo Sapianst
+Homo Sapians
 
         <share-link>
 
-D Malanogastor
+Drosophila Melanogaster
 
         <share-link>
 
-C. Elegans
+Caenorhabditis elegans
 
         <share-link>
 
