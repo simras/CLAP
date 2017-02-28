@@ -16,7 +16,7 @@ while (<ARX>){
     chomp;
     my @l = split;
     next unless ($l[2] eq "exon" || $l[2] eq "CDS");
-    
+   
     my $exon = read_ensembl87_gtf($_);
     if ($exon -> {"type"} eq "exon"){
 	push (@{$genes{$exon->{"chr"}}{$exon->{"transcript_id"}}{"exons"}}, $exon);
@@ -59,11 +59,11 @@ foreach my $chr (keys %genes){
 	### PRINT ALL ######################################################################################
 	&print_all (\@exons, *ALL);
 	&print_introns (\@exons, *ALLINT);
-
+	
 	####################################################################################################
-
+	
 	next unless $genes{$chr}{$transcript}{"CDS"};
-
+	
 	my $utr5_start = "-";
 	my $utr5_end   = "-";
 	my $utr3_start = "-";
@@ -85,6 +85,8 @@ foreach my $chr (keys %genes){
 	
 	my $i = 0;
 	my $done =0;
+
+#	print $exons[$i] -> {"start"}, "\t", $exons[$i] -> {"end"}, "\t", $exons[$i]->{"strand"}, "\t",$start, "\t", $end, "\t", $exons[$i] -> {"gene_id"}, "\t",$exons[$i] -> {"transcript_id"},"\t", $exons[$i]->{"gene_name"}, "\t", $exons[$i]->{"biotype"}, "\n";
 
 	if ($cds_start != $gene_start){   ## the transcript has a 5'UTR annotated 
 	    if ($strand eq "+"){
@@ -119,7 +121,7 @@ foreach my $chr (keys %genes){
 		$utr3_start = $cds_end-1;
 		$utr3_end   = $gene_end;
 	    }
-
+	    
 #	    ## check if 3'utr end is well defined
 	    $done = 0;
 	    $i = 0;
@@ -131,7 +133,6 @@ foreach my $chr (keys %genes){
 		    elsif($cds[-1]->{"start"} == $exons[$i]->{"start"} && $strand eq "-"){
 			$utr3_start = $exons[$i+1] ->{"end"}; ## this exon does not exit
 		    }
-		    
 		    $done = 1;
 		}
 		$i++;

@@ -39,8 +39,11 @@ while (<ARX>){
     }elsif(match($l[0], @m_list)){
 	# records  we wanna print
 	$p = 1;
-        # rename mitochondrial chromosome MT -> M
+        # rename mitochondrial chromosomes for Human, Drosophila and C. Elegans
 	$l[0] =~ s/MT/M/g;
+	$l[0] =~ s/dmel_mitochondrion_genome/M/g;
+	$l[0] =~ s/MtDNA/M/g;
+
 	# rename chromosome records to >chr1, chr2, ... , from >1, >2,...
 	(my $chr = $l[0]) =~ s/>/>chr/g;
 	print "$chr\n";
