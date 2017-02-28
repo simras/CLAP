@@ -35,7 +35,7 @@ name_dna=$base_URL/fasta/$species/dna/Homo_sapiens.GRCh38.dna.toplevel.fa.gz
 
 # Make exon junction sequence library
 #scripts/make_exon_junction_library.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.fa > resources/ensembl.$species.$ver.ej.fa
-
+#rm resources/ensembl.$species.$ver.fa.fai
 # make compressed archive
 #tar -czvf resources.$species.$ver.tar.gz resources/ensembl.$species.$ver.*
 
@@ -56,7 +56,7 @@ scripts/process_genomic_sequence_file.pl resources/$species.$ver.fa "1,2,3,4,5,6
 
 # Make exon junction sequence library
 scripts/make_exon_junction_library.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.fa > resources/ensembl.$species.$ver.ej.fa
-
+rm resources/ensembl.$species.$ver.fa.fai
 # make compressed archive
 tar -czvf resources.$species.$ver.tar.gz resources/ensembl.$species.$ver.*
 exit 0
@@ -77,7 +77,7 @@ scripts/process_genomic_sequence_file.pl resources/$species.$ver.fa "I,II,III,IV
 
 # Make exon junction sequence library
 scripts/make_exon_junction_library.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.fa > resources/ensembl.$species.$ver.ej.fa
-
+rm resources/ensembl.$species.$ver.fa.fai
 # make compressed archive
 tar -czvf resources.$species.$ver.tar.gz resources/ensembl.$species.$ver.*
 
@@ -99,7 +99,7 @@ scripts/process_genomic_sequence_file.pl resources/$species.$ver.fa "2L,2R,3L,3R
 
 # Make exon junction sequence library
 scripts/make_exon_junction_library.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.fa > resources/ensembl.$species.$ver.ej.fa
-
+rm resources/ensembl.$species.$ver.fa.fai
 # make compressed archive
 tar -czvf resources.$species.$ver.tar.gz resources/ensembl.$species.$ver.*
 
