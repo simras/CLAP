@@ -80,6 +80,8 @@ foreach my $id (keys %junctions){
 
     # Convert mitochodrial chromosome annotation
     $chr=~s/MT/M/;
+    $chr=~s/dmel_mitochondrion_genome/M/;
+    $chr=~s/MtDNA/M/;
 
     print T join ("\t", $chr,$segments[0],$segments[1],".",".",$strand), "\n";
     print T join ("\t", $chr,$segments[2],$segments[3],".",".",$strand), "\n";

@@ -18,6 +18,8 @@ while (<ARX>){
     next unless ($l[2] eq "exon" || $l[2] eq "CDS");
    
     my $exon = read_ensembl87_gtf($_);
+
+    # test if coding or non-coding exon
     if ($exon -> {"type"} eq "exon"){
 	push (@{$genes{$exon->{"chr"}}{$exon->{"transcript_id"}}{"exons"}}, $exon);
     }
@@ -267,7 +269,7 @@ sub print_func{
 	    if  ($exons[$i]->{"strand"} eq "+"){
 		$gend = $rend;
 		if ($start eq "-"){
-		    print "1: ",$exons[$i]->{"transcript_id"}, "\n";
+		    print "the exon contains the end: +strand",$exons[$i]->{"transcript_id"}, "\n";
 		    exit (1);
 		}
 		$end = $start + abs ($gend-$gstart);
@@ -276,7 +278,7 @@ sub print_func{
 	    else{
 		$gstart = $rend;
 		if ($start eq "-"){
-		    print "2: ", $exons[$i]->{"transcript_id"}, "\n";
+		    print "the exon contains the end -strand: \n", join(" ",keys $exons[$i],"\n",values $exons[$i]), "\n";
 		    exit (1);
 		}
 		$end = $start + abs ($gend-$gstart);
@@ -317,6 +319,7 @@ sub read_ensembl87_gtf{
     $hash{"gene_name"} = $string; 
     $hash{"gene_name"} =~ /(gene_name.")([_A-Za-z0-9\.\/-]+)/;
     $hash{"gene_name"} = $2;
+# maybe it should be transcript_biotype instead
     $hash{"biotype"} = $string;
     $hash{"biotype"} =~ /(gene_biotype.")([A-Za-z0-9_]+)/;
     $hash{"biotype"} = $2;
