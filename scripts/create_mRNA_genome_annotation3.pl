@@ -269,7 +269,7 @@ sub print_func{
 	    if  ($exons[$i]->{"strand"} eq "+"){
 		$gend = $rend;
 		if ($start eq "-"){
-		    print "the exon contains the end: +strand",$exons[$i]->{"transcript_id"}, "\n";
+		    print "the exon contains the end: +strand \n", join(" ",keys $exons[$i],"\n",values $exons[$i]), "\n";
 		    exit (1);
 		}
 		$end = $start + abs ($gend-$gstart);
