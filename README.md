@@ -21,39 +21,20 @@ Mapper: bwa-pssm (set path of executable) <BR>
 ## 3. FURTHER CONFIGURATION
 Currently the pipeline is set up with an hg19 assemly and a processed ENSEMBL annotation. If one wished to analyze data from a different species or use a different annotation it has to be integrated following a number of steps. The scripts we provide assumes an ENSEMBL annotation GTF file, it will most likely not work with other types of anotation.
 
-### Updating annotation:
+### Updating annotation and mapping indexes:
+The script "scripts/make_annotation.sh" contains commands to download and process annotation and sequence files from Ensembl version 87. As Ensembl alters their data formats slightly across versions these script may need to be updated, they have been test on selected versions back to version 70. To create annotation for other species or other versions, configure the script by changing lines
 
-Download ENSEMBL annotation (here the newest Mouse assembly) 
+        #Ensembl Version
+        ver=87
+        ...
+        # Species name
+        species="homo_sapiens"
+
+        You run the script like this
         
-        wget ftp://ftp.ensembl.org/pub/release-87/gtf/mus_musculus/Mus_musculus.GRCm38.87.chr.gtf.gz
+        scripts/make_annotation.sh
 
-Unzip the gtf file
-
-        gunzip Mus_musculus.GRCm38.87.chr.gtf.gz
-        
-Process annotation to bed-file
-
-        scripts/create_mRNA_genome_annotation3.pl <GTF-file> resources/Ensembl_mouse_87.bed
-
-### Make exon junction sequence file:
-
-        scripts/make_exon_junction_library.pl resources/Ensembl_mouse_87.bed.all.txt mmu10.fa 1> resources/Ensembl_mouse_87_ej.fa
-
-### Getting sequence files:
-Dwonload sequence file
-
-        wget ftp://ftp.ensembl.org/pub/release-87/fasta/mus_musculus/dna/Mus_musculus.GRCm38.dna.primary_assembly.fa.gz
-
-Unzip the fasta
-
-        gunzip Mus_musculus.GRCm38.dna.primary_assembly.fa.gz
-
-Process fasta file Such that there is only one record for each chromosomes and mitochrondrion, named (for mouse):
-
-        >1, >2, ..., >X, >Y and >MT
-        
-        scripts/process_genomic_sequence_file.pl Mus_musculus.GRCm38.dna.primary_assembly.fa \              
-        "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,X,Y,MT" > resources/mmu10.fa
+After creating new annotation it is neccessay to configure the pipeline and create new BWT-indexes for BWA-PSSM. This will be described in the following.
 
 ### Configure the pipeline such that your annotation and sequence file will be used (open scripts/CLAP.sh)
 
@@ -71,26 +52,34 @@ Assuming the annotation and sequence files have been moved to resource folder, s
 
 Processed and tested annotation and sequence files can be found here
 
-Mus Musculus
+<i>Mus musculus</i>
 
         <share-link>
 
-Homo Sapians
+<i>Homo sapians</i>
 
         <share-link>
 
-Drosophila Melanogaster
+<i>Drosophila melanogaster</i>
 
         <share-link>
 
-Caenorhabditis elegans
+<i>Caenorhabditis elegans</i>
+
+        <share-link>
+
+<i>Rattus norvegicus</i>
+
+        <share-link>
+
+<i>Saccharomyces cerevisiae</i>
 
         <share-link>
 
 ## 4. TEST-EXAMPLE
 To test that everything works, run:
 
-        CLAP/testCLAP.sh
+        scripts/testCLAP.sh
 
 It maps, does peak calling and produces a UCSC custom track from reads that map to chr4 in the PAR-CLIP dataset SRR248532.
 
