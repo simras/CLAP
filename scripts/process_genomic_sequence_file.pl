@@ -10,12 +10,12 @@
 use strict;
 use warnings;
 
-if (@ARGV != 2){
+if (@ARGV != 3){
     print "Removed non-wanted chromosomes. Introduce the fasta file with the genomic sequence for all chromosomes and chromosome names that match, which you wish to extract in a komma-separated list e.g. 1,2, ... ,X,Y,MT \n";
     print "\nUSAGE. ./process_genomic_sequence.pl chromosome_sequences.fa <chromosome-names> \n\n";
     exit (1);
 }
-
+my $mito = $ARGV[2];
 my @m_list = split(",",$ARGV[1]);
 my %genes;
 my $p = 0;
@@ -40,9 +40,9 @@ while (<ARX>){
 	# records  we wanna print
 	$p = 1;
         # rename mitochondrial chromosomes for Human, Drosophila and C. Elegans
-	$l[0] =~ s/MT/M/g;
-	$l[0] =~ s/dmel_mitochondrion_genome/M/g;
-	$l[0] =~ s/MtDNA/M/g;
+	$l[0] =~ s/$mito/M/g;
+	#$l[0] =~ s/dmel_mitochondrion_genome/M/g;
+	#$l[0] =~ s/MtDNA/M/g;
 
 	# rename chromosome records to >chr1, chr2, ... , from >1, >2,...
 	(my $chr = $l[0]) =~ s/>/>chr/g;

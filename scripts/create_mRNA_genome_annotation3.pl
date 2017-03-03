@@ -2,7 +2,7 @@
 use strict;
 use Data::Dumper;
 
-if (@ARGV != 2){
+if (@ARGV != 3){
     print "introduce the gtf file with the ensembl annotation and the output prefix\n";
     print "\nUSAGE. ./create_mRNA_genome_annotation.pl ensembl.gff output\n\n";
     exit (1);
@@ -35,6 +35,7 @@ my $cds  = $outname.".cds.txt";
 my $cds_introns=  $outname.".introns.cds.txt";
 my $utr5 = $outname.".5utr.txt";
 my $utr3 = $outname.".3utr.txt";
+my $mito = $ARGV[2];
 
 open (ALL, ">$all") || die ("cannot $all for writing");
 open (CDS, ">$cds") || die ("cannot $cds for writing");
@@ -180,10 +181,8 @@ sub print_all{
 	$end = $start + abs($exons[$i] -> {"end"}-$exons[$i] -> {"start"});
 
 	my $printchr;
-	if ($exons[0]->{"chr"} eq "MT"){
-	    $printchr="chrM";
-	}
-	elsif ($exons[0] ->{"chr"} =~/chr/){
+	$exons[0]->{"chr"} =~ s/$mito/M/g;
+	if ($exons[0] ->{"chr"} =~/chr/){
 	    $printchr=$exons[0]->{"chr"};
 	}
 	else{
@@ -203,10 +202,10 @@ sub print_introns{
     @exons = sort{$a ->{"start"} <=> $b ->{"start"}}@exons;
     
     my $printchr;
-    if ($exons[0]->{"chr"} eq "MT"){
-	$printchr="chrM";
-    }
-    elsif ($exons[0] ->{"chr"} =~/chr/){
+
+    $exons[0]->{"chr"} =~ s/$mito/M/g;
+
+    if ($exons[0] ->{"chr"} =~/chr/){
 	    $printchr=$exons[0]->{"chr"};
 	}
     else{
@@ -234,10 +233,9 @@ sub print_func{
     my $done = 0;
 
     my $printchr;
-    if ($exons[0]->{"chr"} eq "MT"){
-	$printchr="chrM";
-    }
-    elsif ($exons[0] ->{"chr"} =~/chr/){
+
+    $exons[0]->{"chr"} =~ s/$mito/M/g;
+    if ($exons[0] ->{"chr"} =~/chr/){
 	    $printchr=$exons[0]->{"chr"};
 	}
     else{
@@ -269,7 +267,7 @@ sub print_func{
 	    if  ($exons[$i]->{"strand"} eq "+"){
 		$gend = $rend;
 		if ($start eq "-"){
-		    print "the exon contains the end: +strand \n", join(" ",keys $exons[$i],"\n",values $exons[$i]), "\n";
+		    print "The exon contains the end: +strand \n", join(" ",keys $exons[$i],"\n",values $exons[$i]), "\n";
 		    exit (1);
 		}
 		$end = $start + abs ($gend-$gstart);
@@ -278,7 +276,7 @@ sub print_func{
 	    else{
 		$gstart = $rend;
 		if ($start eq "-"){
-		    print "the exon contains the end -strand: \n", join(" ",keys $exons[$i],"\n",values $exons[$i]), "\n";
+		    print "The exon contains the end -strand: \n", join(" ",keys $exons[$i],"\n",values $exons[$i]), "\n";
 		    exit (1);
 		}
 		$end = $start + abs ($gend-$gstart);
@@ -313,19 +311,32 @@ sub read_ensembl87_gtf{
     $hash{"frame"} = $line[7];
  #   print $string, "\n";
     my $parent_line = $line[8];
-    $hash{"gene_id"} = $string; 
-    $hash{"gene_id"} =~ /(gene_id.")([A-Z0-9]+)/;
-    $hash{"gene_id"} = $2;
-    $hash{"gene_name"} = $string; 
-    $hash{"gene_name"} =~ /(gene_name.")([_A-Za-z0-9\.\/-]+)/;
-    $hash{"gene_name"} = $2;
+  #  $hash{"gene_id"} = $string; 
+  #  $hash{"gene_id"} =~ /(gene_id.")([A-Z0-9]+)/;
+  #  $hash{"gene_id"} = $2;
+  #  $hash{"gene_name"} = $string; 
+  #  $hash{"gene_name"} =~ /(gene_name.")([_A-Za-z0-9\.\/-]+)/;
+  #  $hash{"gene_name"} = $2;
 # maybe it should be transcript_biotype instead
+  #  $hash{"biotype"} = $string;
+  #  $hash{"biotype"} =~ /(gene_biotype.")([A-Za-z0-9_]+)/;
+  #  $hash{"biotype"} = $2;
+  #  $hash{"transcript_id"} = $string;
+  #  $hash{"transcript_id"} =~ /(transcript_id.")([_A-Za-z0-9\.\/-]+)/;
+  #  $hash{"transcript_id"} = $2;
+
+    $hash{"gene_id"} = $string;
+    $hash{"gene_id"} =~ /gene_id."(.+?)";/;
+    $hash{"gene_id"} = $1;
+    $hash{"gene_name"} = $string;
+    $hash{"gene_name"} =~ /gene_name."(.+?)";/;
+    $hash{"gene_name"} = $1;
     $hash{"biotype"} = $string;
-    $hash{"biotype"} =~ /(gene_biotype.")([A-Za-z0-9_]+)/;
-    $hash{"biotype"} = $2;
+    $hash{"biotype"} =~ /gene_biotype."(.+?)";/;
+    $hash{"biotype"} = $1;
     $hash{"transcript_id"} = $string;
-    $hash{"transcript_id"} =~ /(transcript_id.")([A-Z0-9]+)/;
-    $hash{"transcript_id"} = $2;
+    $hash{"transcript_id"} =~ /transcript_id."(.+?)";/;
+    $hash{"transcript_id"} = $1;
 #    print Dumper(\%hash);
     return \%hash;
 }
