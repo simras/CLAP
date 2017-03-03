@@ -52,29 +52,24 @@ Assuming the annotation and sequence files have been moved to resource folder, s
 
 Processed and tested annotation and sequence files can be found here
 
+#### Share-link
 <b><i>Homo sapians</i></b>
-
-        https://sid.erda.dk/share_redirect/e0a4KihL8C
+https://sid.erda.dk/share_redirect/e0a4KihL8C
         
 <b><i>Mus musculus</i></b>
-
-        https://sid.erda.dk/share_redirect/BESvrerfdQ
+https://sid.erda.dk/share_redirect/BESvrerfdQ
 
 <b><i>Drosophila melanogaster</i></b>
-
-        https://sid.erda.dk/share_redirect/EIZDWhOQkU
+https://sid.erda.dk/share_redirect/EIZDWhOQkU
 
 <b><i>Caenorhabditis elegans</i></b>
-
-        https://sid.erda.dk/share_redirect/c8tlU073R9
+https://sid.erda.dk/share_redirect/c8tlU073R9
 
 <b><i>Rattus norvegicus</i></b>
-
-        https://sid.erda.dk/share_redirect/BB5p5bQ1lR
+https://sid.erda.dk/share_redirect/BB5p5bQ1lR
 
 <b><i>Saccharomyces cerevisiae</i></b>
-
-        https://sid.erda.dk/share_redirect/aHhDj6y8pW
+https://sid.erda.dk/share_redirect/aHhDj6y8pW
 
 They are retrieved to the CLIP-dir by
 
