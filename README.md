@@ -71,7 +71,7 @@ https://sid.erda.dk/share_redirect/BB5p5bQ1lR
 <b><i>Saccharomyces cerevisiae</i></b><BR>
 https://sid.erda.dk/share_redirect/aHhDj6y8pW
 
-They are retrieved to the CLIP-dir by
+They are retrieved to the CLAP-dir by
 
         wget <share-link>
         # upacked
