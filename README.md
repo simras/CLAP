@@ -30,7 +30,7 @@ The script "scripts/make_annotation.sh" contains commands to download and proces
         # Species name
         species="homo_sapiens"
 
-        You run the script like this
+You run the script like this
         
         scripts/make_annotation.sh
 
@@ -52,27 +52,27 @@ Assuming the annotation and sequence files have been moved to resource folder, s
 
 Processed and tested annotation and sequence files can be found here
 
-<i>Mus musculus</i>
+<b><i>Mus musculus</i>
 
         <share-link>
 
-<i>Homo sapians</i>
+<b><i>Homo sapians</i>
 
         <share-link>
 
-<i>Drosophila melanogaster</i>
+<b><i>Drosophila melanogaster</i>
 
         <share-link>
 
-<i>Caenorhabditis elegans</i>
+<b><i>Caenorhabditis elegans</i>
 
         <share-link>
 
-<i>Rattus norvegicus</i>
+<b><i>Rattus norvegicus</i>
 
         <share-link>
 
-<i>Saccharomyces cerevisiae</i>
+<b><i>Saccharomyces cerevisiae</i>
 
         <share-link>
 
