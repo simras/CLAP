@@ -76,6 +76,12 @@ Processed and tested annotation and sequence files can be found here
 
         <share-link>
 
+They are retrieved to the CLIP-dir by
+
+        wget <share-link>
+        # upacked
+        tar -xvzf <tar.gz-file>
+        
 ## 4. TEST-EXAMPLE
 To test that everything works, run:
 
