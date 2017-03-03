@@ -52,27 +52,27 @@ Assuming the annotation and sequence files have been moved to resource folder, s
 
 Processed and tested annotation and sequence files can be found here
 
-<b><i>Mus musculus</i>
+<b><i>Mus musculus</i></b>
 
         <share-link>
 
-<b><i>Homo sapians</i>
+<b><i>Homo sapians</i></b>
 
         <share-link>
 
-<b><i>Drosophila melanogaster</i>
+<b><i>Drosophila melanogaster</i></b>
 
         <share-link>
 
-<b><i>Caenorhabditis elegans</i>
+<b><i>Caenorhabditis elegans</i></b>
 
         <share-link>
 
-<b><i>Rattus norvegicus</i>
+<b><i>Rattus norvegicus</i></b>
 
         <share-link>
 
-<b><i>Saccharomyces cerevisiae</i>
+<b><i>Saccharomyces cerevisiae</i></b>
 
         <share-link>
 
