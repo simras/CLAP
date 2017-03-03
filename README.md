@@ -46,9 +46,9 @@ Change lines:
 
 Assuming the annotation and sequence files have been moved to resource folder, swap lines by
 
-        idx1=$BASE"/resources/mmu10.fa"
-        exon_annot=$BASE"/resources/Ensembl_mouse_87.bed.all.txt"
-        idx3=$BASE"/resources/ensembl_87_mouse_ej.fa"
+        idx1=$BASE"/resources/ensembl.mus_musculus.87.fa"
+        exon_annot=$BASE"/resources/ensembl.mus_musculus.87.all.txt"
+        idx3=$BASE"/resources/ensembl.mus_musculus.87_ej.fa"
 
 Processed and tested annotation and sequence files can be found here
 
