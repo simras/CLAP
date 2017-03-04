@@ -7,7 +7,7 @@ pipeline works on Apple computers, it could as they are based on FreeBSD, but we
 ## 2. INSTALLATION AND CONFIGURATION
 1. Clone repository, find a suitable directory and use git to dowload the repository
 
-        git clone https://github.com/simras/CLAP/CLAP.git
+        git clone https://github.com/simras/CLAP.git
 
 1. Install Python (link https://www.python.org/)
 
