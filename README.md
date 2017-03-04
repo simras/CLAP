@@ -17,7 +17,7 @@ pipeline works on Apple computers, it could as they are based on FreeBSD, but we
 
 4. Install pyicos (https://bitbucket.org/regulatorygenomicsupf/pyicoteo)
 
-5. Download mapping indexes (hg19 and Ensembl version 71) and other files from (https://sid.erda.dk/share_redirect/F1j2xb0jdB), copy to the folder CLAP, unpack and and merge with folder CLAP/resources (it should happen automatically with wget and tar command described in section 3)
+5. Download mapping indexes (hg19 and Ensembl version 71) and other files from (https://sid.erda.dk/share_redirect/FyGralIMuw), copy to the folder CLAP, unpack and and merge with folder CLAP/resources (it should happen automatically with wget and tar command described in section 3)
 
 6. Set paths in scripts/CLAP.sh 
 Mapper: bwa-pssm (set path of executable) <BR>
