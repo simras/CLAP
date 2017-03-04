@@ -74,7 +74,7 @@ https://sid.erda.dk/share_redirect/aHhDj6y8pW
 They are retrieved to the CLAP-dir by
 
         wget <share-link>
-        # upacked
+        # unpack the compressed file
         tar -xvzf <tar.gz-file>
         
 ## 4. TEST-EXAMPLE
