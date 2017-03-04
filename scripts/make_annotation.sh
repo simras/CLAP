@@ -111,19 +111,6 @@ rm resources/ensembl.$species.$ver.fa.fai
 tar -czvf resources.$species.$ver.tar.gz resources/ensembl.$species.$ver.*
 rm resources/ensembl.$species.$ver.*
 
-# Homo Sapiens
-#1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,Y,X,MT
-# Mus Musculus
-#1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,Y,X,MT
-# C. Elegans
-# I,II,III,IV,V,X,MtDNA
-# Drosophila Melanogastor
-# 2L,2R,3L,3R,4,X,Y,dmel_mitochondrion_genome
-# More species
-# rattus_
-# sacaramyces_cerevisie
-# ftp://ftp.ensembl.org/pub/release-87/gtf/saccharomyces_cerevisiae/Saccharomyces_cerevisiae.R64-1-1.87.gtf.gz
-
 # retrieve data
 species="saccharomyces_cerevisiae"
 name_gtf=$base_URL/gtf/$species/Saccharomyces_cerevisiae.R64-1-1.87.gtf.gz
