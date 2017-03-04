@@ -5,6 +5,10 @@ A relatively powerful PC, minimun 4 GB memory and with Linux installed. The pipe
 pipeline works on Apple computers, it could as they are based on FreeBSD, but we provide no support to the end of making it run on a Mac.
 
 ## 2. INSTALLATION AND CONFIGURATION
+1. Clone repository, find a suitable directory and use git to dowload the repository
+
+        git clone https://github.com/simras/CLAP/CLAP.git
+
 1. Install Python (link https://www.python.org/)
 
 2. Install bwa-pssm (https://github.com/pkerpedjiev/bwa-pssm)
