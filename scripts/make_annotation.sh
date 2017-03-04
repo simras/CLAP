@@ -17,6 +17,7 @@ echo "unfortunately the names in the databases are not standardized in ver 87"
 echo "So, if wget does not retrieve the file, find name of species in" $base_URL/fasta/$species/dna/
 echo "and" $base_URL/gtf/species/
 
+# Species Name
 species="homo_sapiens"
 name_gtf=$base_URL/gtf/$species/Homo_sapiens.GRCh38.87.chr.gtf.gz
 name_dna=$base_URL/fasta/$species/dna/Homo_sapiens.GRCh38.dna.toplevel.fa.gz
