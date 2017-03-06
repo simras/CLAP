@@ -98,9 +98,9 @@ bwa=$BASE/../bwa-pssm/bwa
 pyicos=pyicoclip
 
 # Mapping index location
-idx1=$BASE"/resources/hg19.fa"
-exon_annot=$BASE"/resources/ensembl70.all.long_nooverlap.txt"
-idx3=$BASE"/resources/ensembl70_ej.fa"
+idx1=$BASE"/resources/ensembl.homo_sapiens.87.fa"
+exon_annot=$BASE"/resources/ensembl.homo_sapiens.87.all.txt"
+idx3=$BASE"/resources/ensembl.homo_sapiens.87.ej.fa"
 
 if [ ${#12} -gt 0 ]
 then
@@ -116,9 +116,6 @@ trap "echo $outFolder" 0
 
 # Min read length - species dependent
 length=20
-
-#path="/home/mplass/miRNA_project"
-#seqs="/seqdata/krogh/mplass/miRNA_project/sequences/"
 
 # Treads
 T=$threads
@@ -168,7 +165,7 @@ then
     cd $outFolder
     $scripts/adapterHMM_multiPY.py -q $Qtype -s $adapterS -f $outFolder/$ftmp -o $outFolder/$f2 -l $(($length+$trim)) -p $threads
     rm *_adaptor_hmm.imod
-    rm $outFolder/$ftmp
+#    rm $outFolder/$ftmp
     cd ..
 else
     echo "Don't remove Adaptors"
