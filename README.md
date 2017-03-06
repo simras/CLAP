@@ -33,7 +33,7 @@ The script "scripts/make_annotation.sh" contains commands to download and proces
         ...
         # Species name
         species="homo_sapiens"
-
+                
 You run the script like this
         
         scripts/make_annotation.sh
@@ -50,9 +50,10 @@ Change lines:
 
 Assuming the annotation and sequence files have been moved to resource folder, swap lines by
 
-        idx1=$BASE"/resources/ensembl.mus_musculus.87.fa"
-        exon_annot=$BASE"/resources/ensembl.mus_musculus.87.all.txt"
-        idx3=$BASE"/resources/ensembl.mus_musculus.87_ej.fa"
+        # Mapping index location
+        idx1=$BASE"/resources/ensembl.homo_sapiens.87.fa"
+        exon_annot=$BASE"/resources/ensembl.homo_sapiens.87.txt"
+        idx3=$BASE"/resources/ensembl.homo_sapiens.87.ej.fa"
 
 Processed and tested annotation and sequence files can be found here
 
