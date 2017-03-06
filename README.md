@@ -17,7 +17,7 @@ pipeline works on Apple computers, it could as they are based on FreeBSD, but we
 
 4. Install pyicos (https://bitbucket.org/regulatorygenomicsupf/pyicoteo)
 
-5. Download mapping indexes (hg19 and Ensembl version 71) and other files from (https://sid.erda.dk/share_redirect/F1j2xb0jdB), copy to the folder CLAP, unpack and and merge with folder CLAP/resources (it should happen automatically with wget and tar command described in section 3)
+5. Download mapping indexes (hg19 and Ensembl version 71) and other files from (https://sid.erda.dk/share_redirect/FyGralIMuw), copy to the folder CLAP, unpack and and merge with folder CLAP/resources (it should happen automatically with wget and tar command described in section 3)
 
 6. Set paths in scripts/CLAP.sh 
 Mapper: bwa-pssm (set path of executable) <BR>
@@ -33,7 +33,7 @@ The script "scripts/make_annotation.sh" contains commands to download and proces
         ...
         # Species name
         species="homo_sapiens"
-
+                
 You run the script like this
         
         scripts/make_annotation.sh
@@ -50,9 +50,10 @@ Change lines:
 
 Assuming the annotation and sequence files have been moved to resource folder, swap lines by
 
-        idx1=$BASE"/resources/ensembl.mus_musculus.87.fa"
-        exon_annot=$BASE"/resources/ensembl.mus_musculus.87.all.txt"
-        idx3=$BASE"/resources/ensembl.mus_musculus.87_ej.fa"
+        # Mapping index location
+        idx1=$BASE"/resources/ensembl.homo_sapiens.87.fa"
+        exon_annot=$BASE"/resources/ensembl.homo_sapiens.87.txt"
+        idx3=$BASE"/resources/ensembl.homo_sapiens.87.ej.fa"
 
 Processed and tested annotation and sequence files can be found here
 
