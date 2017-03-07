@@ -1,7 +1,8 @@
 #!/usr/bin/python
 # 
-# 
-# 
+#  Generate mapping statistics given a bwa-PSSM sam-file
+#  Implements parsing of Posterior probability and filtering
+#
 
 def parse_chr(ID,rel_start):
     my_chr,my_str,my_st,my_end = ID.split(":")
@@ -71,9 +72,9 @@ def filter_reads(fname,t,t2,print_IDs):
             rel_start = int(ID[3])
 
             try:
-                m = m + 1
                 rest = l.split("PP:f:")[1]
                 PP = float(rest.split()[0])
+                m = m + 1
             except:
                 PP=0
             revbit = bin(bit)[::-1]
@@ -104,16 +105,16 @@ def filter_reads(fname,t,t2,print_IDs):
     try:
         print >>sys.stderr, "Confidently mapped ",float(cm + cp)/a,"Confidently mapped plus ",float(cp)/a,"Confidently mapped minus ",float(cm)/a, " Multiple mapped ",float(mm + mp)/a," unmapped ",float(u)/a
         print "Confidently_Mapped_Minus","Confidently_Mapped_Plus","Multiple_Mapped_Minus","Multiple_Mapped_Plus", "Unmapped_reads","All_reads"
-        print cm,cp,mp,mm,u,a
-        if cm + cp + mm + mp + u != a:
-            print >>sys.stderr, "Warning: ",a-(cm+cp+mm+mp+u)," reads were not counted."
+        print cm, cp, mp, mm, u, a
+        if (cm + cp + mm + mp + u) != a:
+            print >>sys.stderr, "Warning: ",a - (cm + cp + mm + mp + u)," reads were not counted."
     except ZeroDivisionError:
         
         print >>sys.stderr, "No reads mapped"
         print "No reads mapped"
         print cm,cp,mp,mm,u,a
-        if cm + cp + mm + mp + u != a:
-            print >>sys.stderr, "Warning: ",a-(cm+cp+mm+mp+u)," reads were not counted."
+        if (cm + cp + mm + mp + u) != a:
+            print >>sys.stderr, "Warning: ",a - (cm + cp + mm + mp + u)," reads were not counted."
 
 if __name__ == "__main__":                                                                                                                                         
     from optparse import OptionParser  

@@ -92,7 +92,7 @@ scripts=$BASE"/scripts"
 
 # Configurations
 # PSSM path
-bwa=$BASE/../bwa-pssm/bwa
+bwa=$BASE/../../bwa-pssm/bwa
 
 #Pyicos Path
 pyicos=pyicoclip
