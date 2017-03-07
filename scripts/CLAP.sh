@@ -98,6 +98,10 @@ bwa=$BASE/../bwa-pssm/bwa
 pyicos=pyicoclip
 
 # Mapping index location
+#idx1=$BASE"/resources/hg19.fa"
+#exon_annot=$BASE"/resources/ensembl70.all.long_nooverlap.txt"
+#idx3=$BASE"/resources/ensembl70_ej.fa"
+
 idx1=$BASE"/resources/ensembl.homo_sapiens.87.fa"
 exon_annot=$BASE"/resources/ensembl.homo_sapiens.87.all.txt"
 idx3=$BASE"/resources/ensembl.homo_sapiens.87.ej.fa"
