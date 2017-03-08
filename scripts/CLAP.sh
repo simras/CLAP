@@ -92,19 +92,26 @@ scripts=$BASE"/scripts"
 
 # Configurations
 # PSSM path
+#bwa=bwa
+# Absolute path to binary
 bwa=$BASE/../../bwa-pssm/bwa
 
-#Pyicos Path
+# Pyicos Path
 pyicos=pyicoclip
 
 # Mapping index location
-#idx1=$BASE"/resources/hg19.fa"
-#exon_annot=$BASE"/resources/ensembl70.exon.long_nooverlap.txt"
-#idx3=$BASE"/resources/ensembl70_ej.fa"
+# Ensembl version
+ver=87
+species=homo_sapiens
 
-idx1=$BASE"/resources/ensembl.homo_sapiens.87.fa"
-exon_annot=$BASE"/resources/ensembl.homo_sapiens.87.nooverlap.exons.long.txt"
-idx3=$BASE"/resources/ensembl.homo_sapiens.87.ej.fa"
+# Old data
+#idx1=$BASE"/resources/hg19.fa"
+#idx3=$BASE"/resources/ensembl70_ej.fa"
+#exon_annot=$BASE"/resources/ensembl70.exon.long_nooverlap.txt"
+
+idx1=$BASE/resources/ensembl.$species.$ver.fa
+idx3=$BASE/resources/ensembl.$species.$ver.ej.fa
+exon_annot=$BASE/resources/ensembl.$species.$ver.nooverlap.exons.long.txt
 
 if [ ${#12} -gt 0 ]
 then
