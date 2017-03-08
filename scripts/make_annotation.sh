@@ -10,7 +10,7 @@ set -e
 
 # Ensembl release version
 ver=87
-
+bwa="../bwa-pssm/bwa"
 base_URL="ftp://ftp.ensembl.org/pub/release-"$ver
 
 echo "unfortunately it is not easy to automatically find the record in the database just given a species name in Ensembl ver. 87"
@@ -46,9 +46,16 @@ awk '{OFS="\t"; print $1,$2,$3,".",".",$4}' resources/ensembl.$species.$ver.noov
 scripts/process_genomic_sequence_file.pl resources/$species.$ver.fa "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,Y,X,MT" "MT" > resources/ensembl.$species.$ver.fa
 rm resources/$species.$ver.fa
 
+# Make mapping index
+$bwa index resources/ensembl.$species.$ver.fa
+
 # Make exon junction sequence library
 scripts/make_exon_junction_library.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.fa > resources/ensembl.$species.$ver.ej.fa
 rm resources/ensembl.$species.$ver.fa.fai
+
+# Make mapping index
+$bwa index resources/ensembl.$species.$ver.ej.fa
+
 # make compressed archive
 tar -czvf resources.$species.$ver.tar.gz resources/ensembl.$species.$ver.*
 rm resources/ensembl.$species.$ver.*
@@ -79,9 +86,16 @@ awk '{OFS="\t"; print $1,$2,$3,".",".",$4}' resources/ensembl.$species.$ver.noov
 scripts/process_genomic_sequence_file.pl resources/$species.$ver.fa "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,Y,X,MT" "MT" > resources/ensembl.$species.$ver.fa
 rm resources/$species.$ver.fa
 
+# Make mapping index
+$bwa index resources/ensembl.$species.$ver.fa
+
 # Make exon junction sequence library
 scripts/make_exon_junction_library.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.fa > resources/ensembl.$species.$ver.ej.fa
 rm resources/ensembl.$species.$ver.fa.fai
+
+# Make mapping index
+$bwa index resources/ensembl.$species.$ver.ej.fa
+
 # make compressed archive
 tar -czvf resources.$species.$ver.tar.gz resources/ensembl.$species.$ver.*
 rm resources/ensembl.$species.$ver.*
@@ -112,9 +126,16 @@ awk '{OFS="\t"; print $1,$2,$3,".",".",$4}' resources/ensembl.$species.$ver.noov
 scripts/process_genomic_sequence_file.pl resources/$species.$ver.fa "I,II,III,IV,V,X,MtDNA" "MtDNA" > resources/ensembl.$species.$ver.fa
 rm resources/$species.$ver.fa
 
+# Make mapping index
+$bwa index resources/ensembl.$species.$ver.fa
+
 # Make exon junction sequence library
 scripts/make_exon_junction_library.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.fa > resources/ensembl.$species.$ver.ej.fa
 rm resources/ensembl.$species.$ver.fa.fai
+
+# Make mapping index
+$bwa index resources/ensembl.$species.$ver.ej.fa
+
 # make compressed archive
 tar -czvf resources.$species.$ver.tar.gz resources/ensembl.$species.$ver.*
 rm resources/ensembl.$species.$ver.*
@@ -146,9 +167,16 @@ awk '{OFS="\t"; print $1,$2,$3,".",".",$4}' resources/ensembl.$species.$ver.noov
 scripts/process_genomic_sequence_file.pl resources/$species.$ver.fa "2L,2R,3L,3R,4,X,Y,dmel_mitochondrion_genome" "dmel_mitochondrion_genome" > resources/ensembl.$species.$ver.fa
 rm resources/$species.$ver.fa
 
+# Make mapping index
+$bwa index resources/ensembl.$species.$ver.fa
+
 # Make exon junction sequence library
 scripts/make_exon_junction_library.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.fa > resources/ensembl.$species.$ver.ej.fa
 rm resources/ensembl.$species.$ver.fa.fai
+
+# Make mapping index
+$bwa index resources/ensembl.$species.$ver.ej.fa
+
 # make compressed archive
 tar -czvf resources.$species.$ver.tar.gz resources/ensembl.$species.$ver.*
 rm resources/ensembl.$species.$ver.*
@@ -180,9 +208,15 @@ awk '{OFS="\t"; print $1,$2,$3,".",".",$4}' resources/ensembl.$species.$ver.noov
 scripts/process_genomic_sequence_file.pl resources/$species.$ver.fa "I,II,III,IV,V,VI,VII,VIII,IX,X,XI,XII,XIII,XIV,XV,XVI,Mito" "Mito" > resources/ensembl.$species.$ver.fa
 rm resources/$species.$ver.fa
 
+# Make mapping index
+$bwa index resources/ensembl.$species.$ver.fa
+
 # Make exon junction sequence library
 scripts/make_exon_junction_library.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.fa > resources/ensembl.$species.$ver.ej.fa
 rm resources/ensembl.$species.$ver.fa.fai
+
+# Make mapping index
+$bwa index resources/ensembl.$species.$ver.ej.fa
 
 # make compressed archive
 tar -czvf resources.$species.$ver.tar.gz resources/ensembl.$species.$ver.*
@@ -214,9 +248,16 @@ awk '{OFS="\t"; print $1,$2,$3,".",".",$4}' resources/ensembl.$species.$ver.noov
 scripts/process_genomic_sequence_file.pl resources/$species.$ver.fa "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,X,Y,MT" "MT" > resources/ensembl.$species.$ver.fa
 rm resources/$species.$ver.fa
 
+# Make mapping index
+$bwa index resources/ensembl.$species.$ver.fa
+
 # Make exon junction sequence library
 scripts/make_exon_junction_library.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.fa > resources/ensembl.$species.$ver.ej.fa
 rm resources/ensembl.$species.$ver.fa.fai
+
+# Make mapping index
+$bwa index resources/ensembl.$species.$ver.ej.fa
+
 # make compressed archive
 tar -czvf resources.$species.$ver.tar.gz resources/ensembl.$species.$ver.*
 rm resources/ensembl.$species.$ver.*

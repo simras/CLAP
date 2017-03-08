@@ -99,7 +99,7 @@ pyicos=pyicoclip
 
 # Mapping index location
 #idx1=$BASE"/resources/hg19.fa"
-#exon_annot=$BASE"/resources/ensembl70.all.long_nooverlap.txt"
+#exon_annot=$BASE"/resources/ensembl70.exon.long_nooverlap.txt"
 #idx3=$BASE"/resources/ensembl70_ej.fa"
 
 idx1=$BASE"/resources/ensembl.homo_sapiens.87.fa"
