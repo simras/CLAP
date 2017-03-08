@@ -62,7 +62,7 @@ Processed and tested annotation and sequence files can be found here
 https://sid.erda.dk/share_redirect/e0a4KihL8C
         
 <b><i>Mus musculus</i></b><BR>
-https://sid.erda.dk/share_redirect/BESvrerfdQ
+https://sid.erda.dk/share_redirect/BlzQzJW8jW
 
 <b><i>Drosophila melanogaster</i></b><BR>
 https://sid.erda.dk/share_redirect/EIZDWhOQkU
