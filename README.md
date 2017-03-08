@@ -17,43 +17,16 @@ pipeline works on Apple computers, it could as they are based on FreeBSD, but we
 
 4. Install pyicos (https://bitbucket.org/regulatorygenomicsupf/pyicoteo)
 
-5. Download mapping indexes (hg19 and Ensembl version 71) and other files from (https://sid.erda.dk/share_redirect/FyGralIMuw), copy to the folder CLAP, unpack and and merge with folder CLAP/resources (it should happen automatically with wget and tar command described in section 3)
+5. Download mapping indexes and other files from (links provided below for 6 species), copy to the folder CLAP, unpack and merge with folder CLAP/resources (it should happen automatically with wget and tar command described in section 3)
 
-6. Set paths in scripts/CLAP.sh 
-Mapper: bwa-pssm (set path of executable) <BR>
+Ensure that your annotation and sequence file will be used (open scripts/CLAP.sh)
 
-## 3. FURTHER CONFIGURATION
-Currently the pipeline is set up with an hg19 assemly and a processed ENSEMBL annotation. If one wished to analyze data from a different species or use a different annotation it has to be integrated following a number of steps. The scripts we provide assumes an ENSEMBL annotation GTF file, it will most likely not work with other types of anotation.
-
-### Updating annotation and mapping indexes:
-The script "scripts/make_annotation.sh" contains commands to download and process annotation and sequence files from Ensembl version 87. As Ensembl alters their data formats slightly across versions these script may need to be updated, they have been test on selected versions back to version 70. To create annotation for other species or other versions, configure the script by changing lines
-
-        #Ensembl Version
-        ver=87
-        ...
-        # Species name
-        species="homo_sapiens"
-                
-You run the script like this
-        
-        scripts/make_annotation.sh
-
-After creating new annotation it is neccessay to configure the pipeline and create new BWT-indexes for BWA-PSSM. This will be described in the following.
-
-### Configure the pipeline such that your annotation and sequence file will be used (open scripts/CLAP.sh)
-
-Change lines:
-
-        idx1=$BASE"/resources/hg19.fa"
-        exon_annot=$BASE"/resources/ensembl70.all.long_nooverlap.txt"
-        idx3=$BASE"/resources/ensembl70_ej.fa"
-
-Assuming the annotation and sequence files have been moved to resource folder, swap lines by
+Change lines to fit your Ensembl version and species name.
 
         # Mapping index location
-        idx1=$BASE"/resources/ensembl.homo_sapiens.87.fa"
-        exon_annot=$BASE"/resources/ensembl.homo_sapiens.87.txt"
-        idx3=$BASE"/resources/ensembl.homo_sapiens.87.ej.fa"
+        # Ensembl version
+        ver=87
+        species=homo_sapiens
 
 Processed and tested annotation and sequence files can be found here
 
@@ -81,6 +54,31 @@ They are retrieved to the CLAP-dir by
         wget <share-link>
         # unpack the compressed file
         tar -xvzf <tar.gz-file>
+
+6. Set paths in scripts/CLAP.sh 
+Mapper bwa-pssm (set path of executable) <BR>
+
+        # Absolute path to binary
+        bwa=$BASE/../../bwa-pssm/bwa
+
+## 3. FURTHER CONFIGURATION
+Currently the pipeline is set up with an ENSEMBL version 87 annotation naf supports 6 species. If one wished to analyze data from a different species or use a different annotation it has to be integrated following a number of steps. The scripts we provide assumes an ENSEMBL annotation GTF file, it will most likely not work with other types of anotation.
+
+### Updating annotation and mapping indexes:
+The script "scripts/make_annotation.sh" contains commands to download and process annotation and sequence files from Ensembl version 87. As Ensembl alters their data formats slightly across versions these script may need to be updated, they have been test on selected versions back to version 70. To create annotation for other species or other versions, configure the script by changing lines
+
+        #Ensembl Version
+        ver=87
+        ...
+        # Species name
+        species="homo_sapiens"
+        Possibly also assembly name
+                
+You run the script like this
+        
+        scripts/make_annotation.sh
+
+After creating new annotation it is neccessay to configure the pipeline and create new BWT-indexes for BWA-PSSM. This will be described in the following.
         
 ## 4. TEST-EXAMPLE
 To test that everything works, run:
