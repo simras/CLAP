@@ -34,10 +34,10 @@ scripts/create_mRNA_genome_annotation3.pl resources/ensembl.$species.$ver.gtf re
 rm resources/ensembl.$species.$ver.gtf
 
 # Select longest transcript
-select_longest_transcript.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.cds.txt resources/ensembl.$species.$ver.3utr.txt resources/ensembl.$species.$ver.5utr.txt
+scripts/select_longest_transcript.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.cds.txt resources/ensembl.$species.$ver.3utr.txt resources/ensembl.$species.$ver.5utr.txt
 
 # Make non-overlapping annotation
-discard_overlapping_transcripts.pl  resources/ensembl.$species.$ver.all.long.txt > resources/ensembl.$species.$ver.nooverlap.all.long.txt
+scripts/discard_overlapping_transcripts.pl  resources/ensembl.$species.$ver.all.long.txt > resources/ensembl.$species.$ver.nooverlap.all.long.txt
 
 # Make exon annotation for Pyicos
 awk '{OFS="\t"; print $1,$2,$3,".",".",$4}' resources/ensembl.$species.$ver.nooverlap.all.long.txt >  resources/ensembl.$species.$ver.nooverlap.exons.long.txt
@@ -67,10 +67,10 @@ gunzip resources/$species.$ver.fa.gz
 scripts/create_mRNA_genome_annotation3.pl resources/ensembl.$species.$ver.gtf resources/ensembl.$species.$ver "MT"
 
 # Select longest transcript
-select_longest_transcript.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.cds.txt resources/ensembl.$species.$ver.3utr.txt resources/ensembl.$species.$ver.5utr.txt
+scripts/select_longest_transcript.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.cds.txt resources/ensembl.$species.$ver.3utr.txt resources/ensembl.$species.$ver.5utr.txt
 
 # Make non-overlapping annotation
-discard_overlapping_transcripts.pl  resources/ensembl.$species.$ver.all.long.txt > resources/ensembl.$species.$ver.nooverlap.all.long.txt
+scripts/discard_overlapping_transcripts.pl  resources/ensembl.$species.$ver.all.long.txt > resources/ensembl.$species.$ver.nooverlap.all.long.txt
 
 # Make exon annotation for Pyicos
 awk '{OFS="\t"; print $1,$2,$3,".",".",$4}' resources/ensembl.$species.$ver.nooverlap.all.long.txt >  resources/ensembl.$species.$ver.nooverlap.exons.long.txt
@@ -100,10 +100,10 @@ gunzip resources/$species.$ver.fa.gz
 scripts/create_mRNA_genome_annotation3.pl resources/ensembl.$species.$ver.gtf resources/ensembl.$species.$ver "MtDNA"
 
 # Select longest transcript
-select_longest_transcript.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.cds.txt resources/ensembl.$species.$ver.3utr.txt resources/ensembl.$species.$ver.5utr.txt
+scripts/select_longest_transcript.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.cds.txt resources/ensembl.$species.$ver.3utr.txt resources/ensembl.$species.$ver.5utr.txt
 
 # Make non-overlapping annotation
-discard_overlapping_transcripts.pl  resources/ensembl.$species.$ver.all.long.txt > resources/ensembl.$species.$ver.nooverlap.all.long.txt
+scripts/discard_overlapping_transcripts.pl  resources/ensembl.$species.$ver.all.long.txt > resources/ensembl.$species.$ver.nooverlap.all.long.txt
 
 # Make exon annotation for Pyicos
 awk '{OFS="\t"; print $1,$2,$3,".",".",$4}' resources/ensembl.$species.$ver.nooverlap.all.long.txt >  resources/ensembl.$species.$ver.nooverlap.exons.long.txt
@@ -134,10 +134,10 @@ gunzip resources/$species.$ver.fa.gz
 scripts/create_mRNA_genome_annotation3.pl resources/ensembl.$species.$ver.gtf resources/ensembl.$species.$ver "dmel_mitochondrion_genome"
 
 # Select longest transcript
-select_longest_transcript.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.cds.txt resources/ensembl.$species.$ver.3utr.txt resources/ensembl.$species.$ver.5utr.txt
+scripts/select_longest_transcript.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.cds.txt resources/ensembl.$species.$ver.3utr.txt resources/ensembl.$species.$ver.5utr.txt
 
 # Make non-overlapping annotation
-discard_overlapping_transcripts.pl  resources/ensembl.$species.$ver.all.long.txt > resources/ensembl.$species.$ver.nooverlap.all.long.txt
+scripts/discard_overlapping_transcripts.pl  resources/ensembl.$species.$ver.all.long.txt > resources/ensembl.$species.$ver.nooverlap.all.long.txt
 
 # Make exon annotation for Pyicos
 awk '{OFS="\t"; print $1,$2,$3,".",".",$4}' resources/ensembl.$species.$ver.nooverlap.all.long.txt >  resources/ensembl.$species.$ver.nooverlap.exons.long.txt
@@ -168,10 +168,10 @@ gunzip resources/$species.$ver.fa.gz
 scripts/create_mRNA_genome_annotation3.pl resources/ensembl.$species.$ver.gtf resources/ensembl.$species.$ver "Mito"
 
 # Select longest transcript
-select_longest_transcript.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.cds.txt resources/ensembl.$species.$ver.3utr.txt resources/ensembl.$species.$ver.5utr.txt
+scripts/select_longest_transcript.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.cds.txt resources/ensembl.$species.$ver.3utr.txt resources/ensembl.$species.$ver.5utr.txt
 
 # Make non-overlapping annotation
-discard_overlapping_transcripts.pl  resources/ensembl.$species.$ver.all.long.txt > resources/ensembl.$species.$ver.nooverlap.all.long.txt
+scripts/discard_overlapping_transcripts.pl  resources/ensembl.$species.$ver.all.long.txt > resources/ensembl.$species.$ver.nooverlap.all.long.txt
 
 # Make exon annotation for Pyicos
 awk '{OFS="\t"; print $1,$2,$3,".",".",$4}' resources/ensembl.$species.$ver.nooverlap.all.long.txt >  resources/ensembl.$species.$ver.nooverlap.exons.long.txt
@@ -202,10 +202,10 @@ gunzip resources/$species.$ver.fa.gz
 scripts/create_mRNA_genome_annotation3.pl resources/ensembl.$species.$ver.gtf resources/ensembl.$species.$ver "MT"
 
 # Select longest transcript
-select_longest_transcript.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.cds.txt resources/ensembl.$species.$ver.3utr.txt resources/ensembl.$species.$ver.5utr.txt
+scripts/select_longest_transcript.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.cds.txt resources/ensembl.$species.$ver.3utr.txt resources/ensembl.$species.$ver.5utr.txt
 
 # Make non-overlapping annotation
-discard_overlapping_transcripts.pl  resources/ensembl.$species.$ver.all.long.txt > resources/ensembl.$species.$ver.nooverlap.all.long.txt
+scripts/discard_overlapping_transcripts.pl  resources/ensembl.$species.$ver.all.long.txt > resources/ensembl.$species.$ver.nooverlap.all.long.txt
 
 # Make exon annotation for Pyicos
 awk '{OFS="\t"; print $1,$2,$3,".",".",$4}' resources/ensembl.$species.$ver.nooverlap.all.long.txt >  resources/ensembl.$species.$ver.nooverlap.exons.long.txt

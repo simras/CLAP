@@ -238,7 +238,7 @@ then
     $BASE/scripts/parse_sam_files_ej_final.pl -p $idx3 -t pssm -c $PP -f $outFolder/$map_exon.sam -o $outFolder/$map_exon.bed -a
 fi
 # peak Calling
-#exon_annot="/seqdata/krogh/mplass/RBPs/FDR/ensembl70.long.exons.txt"
+exon_annot=$BASE"/resources/ensembl.homo_sapiens.87.nooverlap.exons.long.txt"
 
 if [ $9 -eq 1 ]
 then
