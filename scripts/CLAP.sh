@@ -103,7 +103,7 @@ pyicos=pyicoclip
 #idx3=$BASE"/resources/ensembl70_ej.fa"
 
 idx1=$BASE"/resources/ensembl.homo_sapiens.87.fa"
-exon_annot=$BASE"/resources/ensembl.homo_sapiens.87.all.txt"
+exon_annot=$BASE"/resources/ensembl.homo_sapiens.87.nooverlap.exons.long.txt"
 idx3=$BASE"/resources/ensembl.homo_sapiens.87.ej.fa"
 
 if [ ${#12} -gt 0 ]
@@ -238,7 +238,6 @@ then
     $BASE/scripts/parse_sam_files_ej_final.pl -p $idx3 -t pssm -c $PP -f $outFolder/$map_exon.sam -o $outFolder/$map_exon.bed -a
 fi
 # peak Calling
-exon_annot=$BASE"/resources/ensembl.homo_sapiens.87.nooverlap.exons.long.txt"
 
 if [ $9 -eq 1 ]
 then
