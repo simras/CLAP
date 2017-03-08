@@ -17,18 +17,12 @@ pipeline works on Apple computers, it could as they are based on FreeBSD, but we
 
 4. Install pyicos (https://bitbucket.org/regulatorygenomicsupf/pyicoteo)
 
-5. Download mapping indexes and other files from (links provided below for 6 species), copy to the folder CLAP, unpack and merge with folder CLAP/resources (it should happen automatically with wget and tar command described in section 3)
+5. Download mapping indexes and other files from (Share-links provided below for 6 species), copy to the folder CLAP, unpack and merge with folder CLAP/resources (it should happen automatically with wget and tar command described below.)
 
-Ensure that your annotation and sequence file will be used (open scripts/CLAP.sh)
+6. Set paths in scripts/CLAP.sh to the mapper bwa-pssm.
 
-Change lines to fit your Ensembl version and species name.
-
-        # Mapping index location
-        # Ensembl version
-        ver=87
-        species=homo_sapiens
-
-Processed and tested annotation and sequence files can be found here
+        # Absolute path to binary
+        bwa=$BASE/../../bwa-pssm/bwa
 
 #### Share-links
 <b><i>Homo sapians</i></b><BR>
@@ -55,11 +49,13 @@ They are retrieved to the CLAP-dir by
         # unpack the compressed file
         tar -xvzf <tar.gz-file>
 
-6. Set paths in scripts/CLAP.sh 
-Mapper bwa-pssm (set path of executable) <BR>
+Ensure that your annotation and sequence file will be used (open scripts/CLAP.sh), by changing lines to fit your Ensembl version and species name.
 
-        # Absolute path to binary
-        bwa=$BASE/../../bwa-pssm/bwa
+        # Mapping index location
+        # Ensembl version
+        ver=87
+        species=homo_sapiens
+
 
 ## 3. FURTHER CONFIGURATION
 Currently the pipeline is set up with an ENSEMBL version 87 annotation naf supports 6 species. If one wished to analyze data from a different species or use a different annotation it has to be integrated following a number of steps. The scripts we provide assumes an ENSEMBL annotation GTF file, it will most likely not work with other types of anotation.
