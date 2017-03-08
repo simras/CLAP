@@ -9,17 +9,17 @@ pipeline works on Apple computers, it could as they are based on FreeBSD, but we
 
         git clone https://github.com/simras/CLAP.git
 
-1. Install Python (link https://www.python.org/)
+2. Install Python (link https://www.python.org/)
 
-2. Install bwa-pssm (https://github.com/pkerpedjiev/bwa-pssm)
+3. Install bwa-pssm (https://github.com/pkerpedjiev/bwa-pssm)
 
-3. Install bedTools (http://bedtools.readthedocs.io/en/latest/)
+4. Install bedTools (http://bedtools.readthedocs.io/en/latest/)
 
-4. Install pyicos (https://bitbucket.org/regulatorygenomicsupf/pyicoteo)
+5. Install pyicos (https://bitbucket.org/regulatorygenomicsupf/pyicoteo)
 
-5. Download mapping indexes and other files from (Share-links provided below for 6 species), copy to the folder CLAP, unpack and merge with folder CLAP/resources (it should happen automatically with wget and tar command described below.)
+6. Download mapping indexes and other files from (Share-links provided below for 6 species), copy to the folder CLAP, unpack and merge with folder CLAP/resources (it should happen automatically with wget and tar command described below.)
 
-6. Set paths in scripts/CLAP.sh to the mapper bwa-pssm.
+7. Set paths in scripts/CLAP.sh to the mapper bwa-pssm.
 
         # Absolute path to binary
         bwa=$BASE/../../bwa-pssm/bwa
