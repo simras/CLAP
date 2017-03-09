@@ -58,33 +58,32 @@ Ensure that your annotation and sequence file will be used (open scripts/CLAP.sh
 
 
 ## 3. FURTHER CONFIGURATION
-Currently the pipeline is set up with an ENSEMBL version 87 annotation naf supports 6 species. If one wished to analyze data from a different species or use a different annotation it has to be integrated following a number of steps. The scripts we provide assumes an ENSEMBL annotation GTF file, it will most likely not work with other types of anotation.
+Currently the pipeline is set up with an ENSEMBL version 87 annotation and supports 6 species. If one wished to analyze data from a different species or use a different annotation it has to be integrated by following a number of steps. The scripts we provide parses an Ensembl annotation (GTF) file, if one wishes to use other annotation standards one will have to maunally make it conform to Ensembl formats.
 
 ### Updating annotation and mapping indexes:
-The script "scripts/make_annotation.sh" contains commands to download and process annotation and sequence files from Ensembl version 87. As Ensembl alters their data formats slightly across versions these script may need to be updated, they have been test on selected versions back to version 70. To create annotation for other species or other versions, configure the script by changing lines
+The script "scripts/make_annotation.sh" contains commands to download and process annotation and sequence files from Ensembl version 87. As Ensembl alters their data formats slightly across versions these script may need to be updated, they have been tested on selected versions back to version 70. To create annotation for other species or other versions, configure the script by changing lines
 
         #Ensembl Version
         ver=87
         ...
         # Species name
         species="homo_sapiens"
-        Possibly also assembly name
-                
-You run the script like this
+        
+and it will be necessary to find the species/assembly name in the Ensembl database, at their ftp site. It is briefly addressed in the following script. Note that some species only have partial assemblies and they will be hard to use in this constext as we assume alle annotation is name according to chromosome and coordinate, rather than scaffolds. You run the script like this
         
         scripts/make_annotation.sh
 
-After creating new annotation it is neccessay to configure the pipeline and create new BWT-indexes for BWA-PSSM. This will be described in the following.
+After creating new annotation it is neccessay to configure the pipeline and create new BWT-indexes for BWA-PSSM, as described above.
         
 ## 4. TEST-EXAMPLE
 To test that everything works, run:
 
         scripts/testCLAP.sh
 
-It maps, does peak calling and produces a UCSC custom track from reads that map to chr4 in the PAR-CLIP dataset SRR248532.
+It maps, does peak calling and produces a UCSC custom track from reads that map to chr4 in the PAR-CLIP human dataset SRR248532. Since it is a human dataset, it is advice to test that the pipeline is setup correctly before setting it up with annotation for other species.
 
 ## 5. USAGE
-All scripts are provided as are and will not be maintained or supported.<BR>
+All scripts are provided as are and will only be minimally maintained or supported.<BR>
 To get a help menu run:
         
         scripts/CLAP.sh
@@ -142,7 +141,8 @@ Example analyses:
 The default substitution model has a T to C conversion rate at 12,5 %. A substitution model with different conversion probability can be created with the script scripts/mk_errorModel.py or the more general script where conversions from and to any nucleotide can be specified (See the repository of BWA-PSSM). <BR>
 
 ## 6. HOW TO CITE<BR>
-M Plass, SH Rasmussen and A Krogh. Highly accessible AU-rich regions in 3′ untranslated regions are hotspots for binding of proteins and miRNAs. PLOS Computational Biology (in review)<BR>
+M Plass, SH Rasmussen and A Krogh. Highly accessible AU-rich regions in 3′ untranslated regions are hotspots for binding of proteins and miRNAs. BioRxiv, 2016<BR>
+doi: https://doi.org/10.1101/042986 <BR>
 
 ## 7. LICENSE<BR>
 Copyright (c) 2017, Simon H. Rasmussen. The software is open source and released under the MIT license.
