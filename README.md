@@ -25,7 +25,10 @@ pipeline works on Apple computers, it could as they are based on FreeBSD, but we
         bwa=$BASE/../../bwa-pssm/bwa
 
 #### Share-links
-<b><i>Homo sapians</i></b><BR>
+<b><i>Homo sapiens</i>, original hg19 configuration.</b><BR>
+https://sid.erda.dk/share_redirect/bEA9VvxroG
+
+<b><i>Homo sapiens</i></b><BR>
 https://sid.erda.dk/share_redirect/e0a4KihL8C
         
 <b><i>Mus musculus</i></b><BR>
@@ -41,7 +44,7 @@ https://sid.erda.dk/share_redirect/c8tlU073R9
 https://sid.erda.dk/share_redirect/BB5p5bQ1lR
 
 <b><i>Saccharomyces cerevisiae</i></b><BR>
-https://sid.erda.dk/share_redirect/aHhDj6y8pW
+https://sid.erda.dk/share_redirect/DThC7AWM7D
 
 They are retrieved to the CLAP-dir by
 
