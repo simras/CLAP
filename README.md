@@ -47,7 +47,7 @@ https://sid.erda.dk/share_redirect/BB5p5bQ1lR
 <b><i>Saccharomyces cerevisiae</i></b><BR>
 https://sid.erda.dk/share_redirect/DThC7AWM7D
 
-They are retrieved to the CLAP-dir by
+The annotation and sequence files are retrieved to the CLAP directory by
 
         wget <share-link>
         # unpack the compressed file
