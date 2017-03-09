@@ -35,10 +35,10 @@ https://sid.erda.dk/share_redirect/e0a4KihL8C
 https://sid.erda.dk/share_redirect/BlzQzJW8jW
 
 <b><i>Drosophila melanogaster</i></b><BR>
-https://sid.erda.dk/share_redirect/EIZDWhOQkU
+https://sid.erda.dk/share_redirect/DxzUSSuL4a
 
 <b><i>Caenorhabditis elegans</i></b><BR>
-https://sid.erda.dk/share_redirect/c8tlU073R9
+https://sid.erda.dk/share_redirect/gEs04xFp1S
 
 <b><i>Rattus norvegicus</i></b><BR>
 https://sid.erda.dk/share_redirect/BB5p5bQ1lR
