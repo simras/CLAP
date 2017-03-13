@@ -26,7 +26,7 @@ pipeline works on Apple computers, it could as they are based on FreeBSD, but we
 
 #### Share-links
 <b><i>Homo sapiens</i>, original hg19 configuration.</b><BR>
-https://sid.erda.dk/share_redirect/bEA9VvxroG
+https://sid.erda.dk/share_redirect/a4shAKTCcf
 
 <b>Ensembl version 87</b><BR>
 <b><i>Homo sapiens</i></b><BR>
