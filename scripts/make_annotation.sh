@@ -10,7 +10,7 @@ set -e
 
 # Ensembl release version
 ver=87
-bwa="../bwa-pssm/bwa"
+bwa="test/bwa-pssm/bwa"
 base_URL="ftp://ftp.ensembl.org/pub/release-"$ver
 
 echo "unfortunately it is not easy to automatically find the record in the database just given a species name in Ensembl ver. 87"
@@ -72,6 +72,7 @@ gunzip resources/$species.$ver.fa.gz
 
 # Create annotation files
 scripts/create_mRNA_genome_annotation3.pl resources/ensembl.$species.$ver.gtf resources/ensembl.$species.$ver "MT"
+rm resources/ensembl.$species.$ver.gtf
 
 # Select longest transcript
 scripts/select_longest_transcript.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.cds.txt resources/ensembl.$species.$ver.3utr.txt resources/ensembl.$species.$ver.5utr.txt
@@ -112,6 +113,7 @@ gunzip resources/$species.$ver.fa.gz
 
 # Create annotation files
 scripts/create_mRNA_genome_annotation3.pl resources/ensembl.$species.$ver.gtf resources/ensembl.$species.$ver "MtDNA"
+rm resources/ensembl.$species.$ver.gtf
 
 # Select longest transcript
 scripts/select_longest_transcript.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.cds.txt resources/ensembl.$species.$ver.3utr.txt resources/ensembl.$species.$ver.5utr.txt
@@ -153,6 +155,7 @@ gunzip resources/$species.$ver.fa.gz
 
 # Create annotation files
 scripts/create_mRNA_genome_annotation3.pl resources/ensembl.$species.$ver.gtf resources/ensembl.$species.$ver "dmel_mitochondrion_genome"
+rm resources/ensembl.$species.$ver.gtf
 
 # Select longest transcript
 scripts/select_longest_transcript.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.cds.txt resources/ensembl.$species.$ver.3utr.txt resources/ensembl.$species.$ver.5utr.txt
@@ -194,6 +197,7 @@ gunzip resources/$species.$ver.fa.gz
 
 # Create annotation files
 scripts/create_mRNA_genome_annotation3.pl resources/ensembl.$species.$ver.gtf resources/ensembl.$species.$ver "Mito"
+rm resources/ensembl.$species.$ver.gtf
 
 # Select longest transcript
 scripts/select_longest_transcript.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.cds.txt resources/ensembl.$species.$ver.3utr.txt resources/ensembl.$species.$ver.5utr.txt
@@ -234,6 +238,7 @@ gunzip resources/$species.$ver.fa.gz
 
 # Create annotation files
 scripts/create_mRNA_genome_annotation3.pl resources/ensembl.$species.$ver.gtf resources/ensembl.$species.$ver "MT"
+rm resources/ensembl.$species.$ver.gtf
 
 # Select longest transcript
 scripts/select_longest_transcript.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.cds.txt resources/ensembl.$species.$ver.3utr.txt resources/ensembl.$species.$ver.5utr.txt
