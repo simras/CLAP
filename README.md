@@ -1,21 +1,20 @@
-CLIP Analysis Pipeline - CLAP, is used to analyse CLIP-seq (specifically PAR-CLIP, HITS-CLIP and iCLIP) data. The family of protocols where cross-linking immunoprecipitation coupled with high-throughput sequencing are referred to as CLIP. They are used identify binding sites of RNA-binding proteins and exist in the different flavours mentioned above. The data produced by these protocols have different characteristics which are account for in this pipeline such that it can be used to process the above three versions and combination of them like iCLIP using 4SU nucleosides (PAR-iCLIP).
+CLIP Analysis Pipeline - CLAP, is used to analyse CLIP-seq (specifically PAR-CLIP, HITS-CLIP and iCLIP) data. The family of protocols where cross-linking immunoprecipitation coupled with high-throughput sequencing are referred to as CLIP. They are used identify binding sites of RNA-binding proteins and exist in the different flavours mentioned above. The data produced by these protocols have different characteristics which are accounted for in this pipeline, such that it can be used to process the above three versions and combination of them like iCLIP using 4SU nucleosides (PAR-iCLIP).
 
 ## 1. SYSTEM REQUIREMENTS
-A relatively powerful PC, minimun 4 GB memory and with Linux installed. The pipeline is tested on Ubuntu 16.04, in principle it should run on a standard Linux setup with BASH Shell and some version of awk installed. We will not guarantee that the
-pipeline works on Apple computers, it could as they are based on FreeBSD, but we provide no support to the end of making it run on a Mac.
+A relatively powerful computer is needed, minimun 4 GB memory and with Linux or Mac OS X installed. The pipeline is tested on different versions of Ubuntu, Debian and Mac OS X Sierra. It requires a BASH Shell and some version of awk installed.
 
 ## 2. INSTALLATION AND CONFIGURATION
 1. Clone repository, find a suitable directory and use git to dowload the repository
 
         git clone https://github.com/simras/CLAP.git
 
-2. Install Python (link https://www.python.org/)
+2. Install Python, if not alrady installed (https://www.python.org/).
 
-3. Install bwa-pssm (https://github.com/pkerpedjiev/bwa-pssm)
+3. Install bwa-pssm (https://github.com/pkerpedjiev/bwa-pssm). bwa-pssm needs to be build from source and requires gdsl.
 
-4. Install bedTools (http://bedtools.readthedocs.io/en/latest/)
+4. Install bedTools (http://bedtools.readthedocs.io/en/latest/). The easy way is to use package managers, brew on Mac, apt-get on debian/Ubuntu or yum on other Linux distributions
 
-5. Install pyicos (https://bitbucket.org/regulatorygenomicsupf/pyicoteo)
+5. Install pyicos (https://bitbucket.org/regulatorygenomicsupf/pyicoteo). Needs to be downloaded and installed.
 
 6. Download mapping indexes and other files from (Share-links provided below for 6 species), copy to the folder CLAP, unpack and merge with folder CLAP/resources (it should happen automatically with wget and tar command described below.)
 
@@ -59,7 +58,6 @@ Ensure that your annotation and sequence file will be used (open scripts/CLAP.sh
         # Ensembl version
         ver=87
         species=homo_sapiens
-
 
 ## 3. FURTHER CONFIGURATION
 Currently the pipeline is set up with an ENSEMBL version 87 annotation and supports 6 species. If one wished to analyze data from a different species or use a different annotation it has to be integrated by following a number of steps. The scripts we provide parses an Ensembl annotation (GTF) file, if one wishes to use other annotation standards one will have to maunally make it conform to Ensembl formats.
