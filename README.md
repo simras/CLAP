@@ -149,4 +149,4 @@ M Plass, SH Rasmussen and A Krogh. Highly accessible AU-rich regions in 3′ unt
 doi: https://doi.org/10.1101/042986 <BR>
 
 ## 7. LICENSE<BR>
-Copyright (c) 2017, Simon H. Rasmussen. The software is open source and released under the MIT license.
+Copyright (c) 2017, Simon Horskjær Rasmussen and Mireya Plass. The software is open source and released under the MIT license.
