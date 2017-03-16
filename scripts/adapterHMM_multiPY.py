@@ -50,7 +50,7 @@ def run(orig_file,cut_file,cutoff,mp,model,seq,ntrim,trim,BS,prime,qtype):
     else:
         # Construct pipeline command: convert to fasta, decode, cut and return fastq file
         cmd = "cat " + orig_file + " | "+ adr +"trimQs.py " + primeopt + " -l " + str(cutoff) + " -q " + str(qtype) + " " + ntrim + trim + "| awk \'1 == NR % 4,2 == NR % 4\' |" + adr + "multiPY.py -e -p " + str(mp) + " -b " + str(blockSize) + " -l 2 -c \" " + adr + decodeanhmm + " -v -PrintNumbers -modelfile " +  model + "\"" + " 2> /dev/null | " + adr + "analyzeSignals.py " + primeopt + " | " + adr + "cutIT.py -f " + orig_file + " " + primeopt + " -c " + str(cutoff) + outpipe + cut_file
-    #print cmd
+    
     os.system(cmd)
         
 if __name__ == "__main__":
