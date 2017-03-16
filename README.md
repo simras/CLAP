@@ -22,7 +22,7 @@ pipeline works on Apple computers, it could as they are based on FreeBSD, but we
 7. Set paths in scripts/CLAP.sh to the mapper bwa-pssm.
 
         # Absolute path to binary
-        bwa=$BASE/../../bwa-pssm/bwa
+        bwa=$BASE/../bwa-pssm/bwa
 
 #### Share-links
 <b><i>Homo sapiens</i>, original hg19 configuration.</b><BR>
@@ -149,4 +149,4 @@ M Plass, SH Rasmussen and A Krogh. Highly accessible AU-rich regions in 3′ unt
 doi: https://doi.org/10.1101/042986 <BR>
 
 ## 7. LICENSE<BR>
-Copyright (c) 2017, Simon H. Rasmussen. The software is open source and released under the MIT license.
+Copyright (c) 2017, Simon Horskjær Rasmussen and Mireya Plass. The software is open source and released under the MIT license.
