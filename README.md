@@ -22,7 +22,7 @@ pipeline works on Apple computers, it could as they are based on FreeBSD, but we
 7. Set paths in scripts/CLAP.sh to the mapper bwa-pssm.
 
         # Absolute path to binary
-        bwa=$BASE/../../bwa-pssm/bwa
+        bwa=$BASE/../bwa-pssm/bwa
 
 #### Share-links
 <b><i>Homo sapiens</i>, original hg19 configuration.</b><BR>
