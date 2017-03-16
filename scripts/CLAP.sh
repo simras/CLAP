@@ -8,6 +8,18 @@
 #
 ####################################################################################################
 ####################################################################################################
+# TODO: Implement time stamps and print header
+#start=`date +%s`
+#stuff
+#end=`date +%s`
+#
+#runtime=$((end-start))
+#
+############
+echo "#################### CLAP - CLIP Analysis Pipeline ####################"
+echo "#######################################################################"
+echo "#######################################################################"
+echo
 
 trap "" 1
 if [ $# -lt 14 ]
@@ -51,7 +63,7 @@ if [ $# -lt 14 ]
     exit 0
 fi
 
-set -x
+#set -x
 set -e
 
 if [ ${12} -eq 0 ]
@@ -94,10 +106,44 @@ scripts=$BASE"/scripts"
 # PSSM path
 #bwa=bwa
 # Absolute path to binary
-bwa=$BASE/../../bwa-pssm/bwa
+bwa=$BASE/../bwa-pssm/bwa
+echo "#################### Testing if pipeline is correctly configured..."
+
+if [ -z $(which $bwa) ]
+then
+    echo
+    echo "#################### bwa-pssm mapper could not be located here:" $bwa
+    echo "#################### Please correct path"
+exit
+else
+    echo 
+    echo "#################### bwa-pssm mapper located" 
+fi
 
 # Pyicos Path
 pyicos=pyicoclip
+
+if [ -z $(which $pyicos) ]
+then
+    echo "#################### pyicosclip could not be located here:" $pyicos
+    echo "######### Please correct path."
+exit
+else 
+    echo "#################### pyicosclip located"
+fi
+
+bedTools=bedtools
+if [ -z $(which $bedTools) ]
+then 
+    echo "#################### bedtools could not be located here" $bedTools 
+    echo "#################### Please correct path"
+    echo
+exit
+else
+    echo "#################### bedTools located"
+    echo
+fi
+
 
 # Mapping index location
 # Ensembl version
@@ -121,7 +167,9 @@ else
 fi
 
 mkdir $outFolder
+trap 'echo "###################### Output directory: "' 0
 trap "echo $outFolder" 0
+
 #exec 1> $outFolder/mapping_pipe.log
 #exec 2>&1    
 
@@ -159,19 +207,23 @@ clusters=$barcode"_"${FILE%.*}"_clusters".bed
 if [ $6 -eq 1 -o $6 -eq 3 ]
 then
     # Remove barcode and select data of max edit dist 1, offset is at what position the fixed barcode starts XXXTTGTXX_READ_ > primer XXACAAXXX
-    echo "Remove barcodes and pick out data"
+    echo
+    echo "#################### Removing barcodes and pick out data "
+    
     cd $outFolder
     cat $FILE_NAME/$FILE|$scripts/get_data_from_barcode.py -p $barcode -o 3 -m 1 1> $outFolder/$ftmp
     cd ..
 else
-    echo "Data has no fixed barcodes"
+    echo "#################### Data has no fixed barcodes ##"
     cp $FILE_NAME/$FILE $outFolder/$ftmp
 fi
-echo "adapter length" ${#2}
+
 if [ ${#2} -gt 0 ]
 then
     # Remove Adaptors
-    echo "Remove Adaptors"
+   
+    echo "#################### Removing Adapters "
+    echo
     adapterS=$2
     cd $outFolder
     $scripts/adapterHMM_multiPY.py -q $Qtype -s $adapterS -f $outFolder/$ftmp -o $outFolder/$f2 -l $(($length+$trim)) -p $threads
@@ -179,15 +231,21 @@ then
 #    rm $outFolder/$ftmp
     cd ..
 else
-    echo "Don't remove Adaptors"
+    echo
+    echo "#################### Will not remove Adaptors "
+    echo
     mv $outFolder/$ftmp $outFolder/$f2
 fi
 # Remove duplicates
 if [ $6 -eq 1 -o $6 -eq 4 ]
 then
-    echo "Remove duplicates with random barcodes"
+    echo
+    echo "#################### Remove duplicates using random barcodes "
+    echo
 else
-    echo "Remove duplicates without random barcodes"
+    echo
+    echo "#################### Remove duplicates without using random barcodes "
+    echo
     trim=0
 fi
 
@@ -205,37 +263,57 @@ rm $outFolder/$f2
 
 map_reads=${f3%.*}
 map_exon=$map_reads.ej
-echo "Map"
+echo
+echo "#################### Mapping to the genome with bwa-pssm " 
+
 if [ ${10} -eq 0 ]
 then
+
+echo "#################### Use substituion model " 
+echo
     # Map with error model
     $bwa pssm -n $E -l $L -m $H -t $T -P $P $phreadOpt -G $error_model $idx1 $outFolder/$map_reads.fastq  > $outFolder/$map_reads.sai
-    $bwa samse -f $outFolder/$map_reads.sam $idx1 $outFolder/$map_reads.sai $outFolder/$map_reads.fastq
-    rm $outFolder/$map_reads.sai
-    cat $outFolder/$map_reads.sam|$scripts/read_stats.py -t $PP 1> $outFolder/$map_reads.mappingstats.txt
 else
+
+echo "#################### Do not use substitution model " 
+echo
     $bwa pssm -n $E -l $L -m $H -t $T -P $P $phreadOpt $idx1 $outFolder/$map_reads.fastq  > $outFolder/$map_reads.sai
-    $bwa samse -f $outFolder/$map_reads.sam $idx1 $outFolder/$map_reads.sai $outFolder/$map_reads.fastq
-    rm $outFolder/$map_reads.sai
-    cat $outFolder/$map_reads.sam|$scripts/read_stats.py -t $PP 1> $outFolder/$map_reads.mappingstats.txt
+#    $bwa samse -f $outFolder/$map_reads.sam $idx1 $outFolder/$map_reads.sai $outFolder/$map_reads.fastq
+#    rm $outFolder/$map_reads.sai
+#    cat $outFolder/$map_reads.sam|$scripts/read_stats.py -t $PP 1> $outFolder/$map_reads.mappingstats.txt
 fi
+$bwa samse -f $outFolder/$map_reads.sam $idx1 $outFolder/$map_reads.sai $outFolder/$map_reads.fastq
+rm $outFolder/$map_reads.sai
+echo
+echo "#################### Genome mapping statistics "
+echo
+cat $outFolder/$map_reads.sam|$scripts/read_stats.py -t $PP 1> $outFolder/$map_reads.mappingstats.txt
 if [ $9 -eq 2 ]
 then
+echo
+echo "#################### Mapping to the exon junctions with bwa-pssm " 
     # Exon-junction mapping
     $scripts/select_unmapped_reads.pl -f $outFolder/$map_reads.fastq -s $outFolder/$map_reads.sam  > $outFolder/$map_exon.fastq
     
     if [ ${10} -eq 0 ]
     then	
+	echo "#################### Use substituion model " 
+	echo
 	$bwa pssm -n $E -l $L -m $H -t $T -P $P $phreadOpt -G $error_model $idx3 $outFolder/$map_exon.fastq > $outFolder/$map_exon.sai
     else
+	echo "#################### Do not use substitution model " 
+	echo
 	$bwa pssm -n $E -l $L -m $H -t $T -P $P $phreadOpt $idx3 $outFolder/$map_exon.fastq > $outFolder/$map_exon.sai
     fi
     $bwa samse -f $outFolder/$map_exon.sam $idx3 $outFolder/$map_exon.sai $outFolder/$map_exon.fastq
     rm $outFolder/$map_exon.sai
-    cat $outFolder/$map_exon.sam |$scripts/read_stats.py -t $PP 1> $outFolder/$map_exon.mappingstats.txt
+    
+    echo
+    echo "#################### Exon junction mapping statistics "
+    echo
+    cat $outFolder/$map_exon.sam |$scripts/read_stats.py -t $PP -j 1> $outFolder/$map_exon.mappingstats.txt
 fi
 #done
-
 # Make bed-files 
 # Genome
 $BASE/scripts/parse_sam_files_final.pl -p $idx1 -t pssm -c $PP -f $outFolder/$map_reads.sam -o $outFolder/$map_reads.bed -a
@@ -245,6 +323,9 @@ then
     $BASE/scripts/parse_sam_files_ej_final.pl -p $idx3 -t pssm -c $PP -f $outFolder/$map_exon.sam -o $outFolder/$map_exon.bed -a
 fi
 # peak Calling
+echo
+echo "#################### Calculate False Discovery rate of read clusters with Pyicosclip " 
+echo
 
 if [ $9 -eq 1 ]
 then
@@ -296,24 +377,24 @@ then
    # cat $outFolder/$peak_in
    # cat $outFolder/$peak_out
 fi
+echo
+echo "#################### Producing UCSC custom tracks with significant peaks (bed-track format) "
 
 if [ $7 -eq 1 ]
 then
     if [ $8 -eq 1 ]
     then
-	echo "Printing UCSC custom tracks for stranded protocol..."
-	cat $outFolder/$peak_out|$scripts/pk2bedGraph_info.pl -c 1,2,4,6 -s - -n "-_strand_"$name -d "Clusters on minus-strand" > $outFolder/"UCSC_m_"${FILE%.*}".track"
-	cat $outFolder/$peak_out | $scripts/pk2bedGraph_info.pl -c 1,2,4,6 -s + -n "+_strand_"$name -d  "Clusters on plus-strand" > $outFolder/"UCSC_p_"${FILE%.*}".track"
+	echo "#################### UCSC custom tracks for stranded protocol..."
+	cat $outFolder/$peak_out|$scripts/pk2bedGraph_info.pl -c 1,2,4,6 -s - -n "-_strand_"$name -d "Clusters on minus-strand" > $outFolder/"UCSC_-_"${FILE%.*}".track"
+	cat $outFolder/$peak_out | $scripts/pk2bedGraph_info.pl -c 1,2,4,6 -s + -n "+_strand_"$name -d  "Clusters on plus-strand" > $outFolder/"UCSC_+_"${FILE%.*}".track"
 	
-	gzip $outFolder/"UCSC_m_"${FILE%.*}".track"
-	gzip $outFolder/"UCSC_p_"${FILE%.*}".track"
+	gzip $outFolder/"UCSC_-_"${FILE%.*}".track"
+	gzip $outFolder/"UCSC_+_"${FILE%.*}".track"
     else
-	echo "Printing UCSC custom track for strandless protocol..."
+	echo "#################### UCSC custom track for strandless protocol..."
 	cat $outFolder/$peak_out | $scripts/pk2bedGraph_info.pl -c 1,2,4,6 -s "+" -n $name -d "Clusters on both strands" > $outFolder/"UCSC_mp_"${FILE%.*}".track"
 	gzip $outFolder/"UCSC_-+_"${FILE%.*}".track"
     fi
 fi
 
 #done
-echo "Files are in:"
-echo $outFolder

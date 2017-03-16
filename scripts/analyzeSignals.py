@@ -44,13 +44,13 @@ def analyzeSignals(fn):
                 pred = tmp_pred
                 start = int(l.split()[4])
                 firstSig = False
-    print >> sys.stderr, "Number of predictions with no Signal: ", j, i#, lst[0]
+    print >> sys.stderr, "analyzeSignals.py: Number of predictions with no Signal: ", j, i#, lst[0]
 #    print sorted(lst, key=itemgetter(1))[0:10]
 #    print sorted(lst, reverse=True,key=itemgetter(1))[0:10]
 
 def analyzeSignals_viterbi(fn,prime):
     import os
-    import sys 
+    import sys
     from operator import itemgetter
 
     cwd = os.getcwd()
@@ -68,6 +68,7 @@ def analyzeSignals_viterbi(fn,prime):
     l = '#'
     ID = ""
     printID = True
+    ldist = {}
     while True:
 #        print "#1" + l + "#2"
         if sin:
@@ -82,7 +83,11 @@ def analyzeSignals_viterbi(fn,prime):
             printID = True
             i = i + 1
             if not first:
-                print ID,start      
+                print ID,start
+                if ldist.has_key(lseq - start + 1):
+                    ldist[lseq - start + 1] = ldist[lseq - start + 1] + 1
+                else:
+                    ldist[lseq - start + 1] = 1
             ID = l[1:].split()[0].rstrip()
             first = False
         elif l[0:4] == "%len":
@@ -96,18 +101,23 @@ def analyzeSignals_viterbi(fn,prime):
                     # start is actually the end of the adapter
                     start = lseq - int(l.split("b")[-1].split()[0])
             except:
-                #    print l
+                
                 if not prime:
                     start = int(l.split("b")[-1].split()[-1]) + 1
                 else:
                     start = 0
                 j = j + 1
             printID = True
-    
+        
     if start != -1 and printID:
         print ID,start
- #   j = j + 1
-    print >> sys.stderr, "Number of sequences with no adaptor:", j, "of", i, "sequences"#, lst[0]
+    for k,v in sorted(ldist.items(),key=itemgetter(0)):
+        if k == 0:
+            print >> sys.stderr, "analyzeSignals.py: Sequences with no adaptor:",v
+        else:
+            print >> sys.stderr, "analyzeSignals.py: Adaptor length",k,"number",v
+                        
+    print >> sys.stderr, "analyzeSignals.py: Sequences with adapter", i-j, "all sequences",i
 #    print sorted(lst, key=itemgetter(1))[0:10]
 #    print sorted(lst, reverse=True,key=itemgetter(1))[0:10]
         

@@ -4,46 +4,9 @@
 #  Implements parsing of Posterior probability and filtering
 #
 
-def parse_chr(ID,rel_start):
-    my_chr,my_str,my_st,my_end = ID.split(":")
-    #print my_chr,my_str,my_st,my_end
-    my_st = int(my_st)
-    my_end = int(my_end)
-    my_len = my_end-my_st
-    #my_st = .split(":")[0]
-    #print my_chr, my_str,my_st
-    if my_str == "-":
-        my_start = int(my_st) + rel_start
-    else:
-        my_start = int(my_st) - rel_start + my_len
-    #print  my_chr, my_start, my_str    
-    return my_chr, my_start, my_str
 
-def parse_chr2(ID,rel_start):
-    my_chr,my_str,my_st,my_end = ID.split(":")
-    my_st = int(my_st)
-    my_end = int(my_end)
-    my_len = my_end-my_st
 
-    if my_str == "-":
-        my_start = int(my_st) +  my_len - rel_start
-    else:
-        my_start = int(my_st) + rel_start #+ my_len
-    return my_chr, my_start, my_str
-
-def parse_chr3(ID,rel_start,my_str,r_len):
-    try:
-        my_chr,my_st,my_end,my_str = ID.split(":")
-        if my_st == "+" or my_st == "+" :
-            my_chr,my_str,my_st,my_end = ID.split(":")
-        my_st = int(my_st)
-        my_start = my_st + rel_start
-    except:
-        my_chr = ID
-        my_start = rel_start
-    return my_chr, my_start, my_str
-
-def filter_reads(fname,t,t2,print_IDs):
+def filter_reads(fname,t,t2,print_IDs,junction_reads):
     import sys
     u = 0
     m = 0
@@ -84,26 +47,48 @@ def filter_reads(fname,t,t2,print_IDs):
                 u = u + 1
             elif bit == 0:
                 # Mapped to the plus strand
-                if PP > t:
-                    # confidently mapped
-                    cp = cp + 1        
+                if junction_reads:
+                    chr_ID = ID[2]
+                    strand = chr_ID.split(":")[1]
+                    if strand == "-":
+                        if PP > t:
+                            # confidently mapped
+                            cm = cm + 1
+                            
+                        else:
+                            # multimapped
+                            mm = mm + 1
+                    else:
+                        if PP > t:
+                            # confidently mapped
+                            cp = cp + 1
+                            
+                        else:
+                            # multimapped
+                            mp = mp + 1
                 else:
-                    # multimapped
-                    mp = mp + 1
+                    if PP > t:
+                        # confidently mapped
+                        cp = cp + 1
+                        #
+                    else:
+                        # multimapped
+                        mp = mp + 1
             elif int(revbit[4]) == 1:
                 # Mapped to the minus strand
                 if PP > t:
                     # confidently mapped
                     cm = cm + 1
+                    
                 else:
                     # multimapped
                     mm = mm + 1
             else:
-                print >>sys.stderr, "Warning: Unexpected input"
+                print >>sys.stderr, "read_stats.py: Warning: Unexpected input"
         except:
             None
     try:
-        print >>sys.stderr, "Confidently mapped ",float(cm + cp)/a,"Confidently mapped plus ",float(cp)/a,"Confidently mapped minus ",float(cm)/a, " Multiple mapped ",float(mm + mp)/a," unmapped ",float(u)/a
+        print >>sys.stderr, "read_stats.py: Confidently mapped ",round(float(cm + cp)/a,2),"Confidently mapped plus ",round(float(cp)/a,2),"Confidently mapped minus ",round(float(cm)/a,2), " Multiple mapped ",round(float(mm + mp)/a,2)," unmapped ",round(float(u)/a,2)
         print "Confidently_Mapped_Minus","Confidently_Mapped_Plus","Multiple_Mapped_Minus","Multiple_Mapped_Plus", "Unmapped_reads","All_reads"
         print cm, cp, mp, mm, u, a
         if (cm + cp + mm + mp + u) != a:
@@ -125,8 +110,9 @@ if __name__ == "__main__":
     parser.add_option("-l", action="store", type="float", dest="l",default="0.01", help="PP low bound")
     parser.add_option("-m", action="store", type="int", dest="m",default="1", help="Mode 1: filter reads, 2: select reads and 3: count correctly mapped.")
     parser.add_option("-i", action="store_true", dest="i",default=False, help="Print IDs of selected reads.")
+    parser.add_option("-j", action="store_true", dest="j",default=False, help="Reads mapped to exon junction index.")
     
     (options, args) = parser.parse_args()
         
 #    countR(options.f,options.t,options.e,options.l,options.s)
-    filter_reads(options.f,options.t,options.l,options.i)
+    filter_reads(options.f,options.t,options.l,options.i,options.j)

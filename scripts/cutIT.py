@@ -142,8 +142,9 @@ def cutIT_fastq(fastq,predfile,cutoff,prime):
         else:
             k = k + 1
             next = False
-        
-    print >> sys.stderr,"sequences filtered out ",k," Sequences printed" ,i 
+    
+    print >> sys.stderr,"cutIT.py: Sequences filtered out",k
+    print >> sys.stderr,"cutIT.py: Sequences printed" ,i 
          
 if __name__ == "__main__":
     from optparse import OptionParser

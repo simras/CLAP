@@ -4,32 +4,10 @@
 #   By Simon H. Rasmussen
 #   Bioinformatics Centre
 #   University of Copenhagen
+#
 
 from types import *
 
-def cutIT_fasta(fastq,predfile,cutoff):
-    import os
-    import sys
-    line = ""
-    if fastq != "":
-        file1 = open(fastq,'r')    
-        lines1 = file1.readlines()
-    else:
-        lines1 = sys.stdin.readlines()   
-    file2 = open(predfile,'r')
-    lines2 = file2.readlines()
-    numLines = len(lines2)
-    for i in range(numLines):
-        full_ID = lines1[2*i].upper()
-        ID = int(full_ID.split(".")[1])
-        seq = lines1[2*i+1]
-        l = lines2[i].split()
-        ID2   = int(l[0].split(".")[1])
-        start = int(l[1])
-        if ID == ID2:
-            if not full_ID == "" and not seq[0:start-1] == "" and start > cutoff:
-                print full_ID,
-                print seq[0:start-1]
 
 def trimQs(fastq,ntrim,trim5,trim3,minl,fivePrime,cl,qtype):
     '''
@@ -41,6 +19,8 @@ def trimQs(fastq,ntrim,trim5,trim3,minl,fivePrime,cl,qtype):
     import gzip
     quals = ""
     quals = chr(qtype + 1) + chr(qtype + 2) + chr(qtype + 3) + chr(qtype + 4) + chr(qtype + 5)
+    print >> sys.stderr, "trimQs.py: Phread", qtype
+    print >> sys.stderr, "trimQs.py: remove bases with qualities,", quals
     line = ""
     file1 = sys.stdin
     i = 0
@@ -57,7 +37,7 @@ def trimQs(fastq,ntrim,trim5,trim3,minl,fivePrime,cl,qtype):
         try:
             ID = (full_ID.split()[0])[1:]
         except:
-            print >> sys.stderr, "Empty line"
+            print >> sys.stderr, "trimQs.py: Empty line"
             next
         #        ID_rest = (full_ID.split())[1:]
         line1 = file1.readline()
@@ -114,13 +94,18 @@ def trimQs(fastq,ntrim,trim5,trim3,minl,fivePrime,cl,qtype):
                         firstLine = full_ID.strip()[1:] + " length=" + str(start)
                 print ">" + firstLine
                 print seq[trim5:start]
+                #print >> sys.stderr,str(start), str(lseq-trim3)
+                #print >> sys.stderr, seq[trim5:start]
+                #print >> sys.stderr, seq,
+                #print >> sys.stderr, Qs
+                #print >> sys.stderr, ""
                 print "+" + firstLine
                 print Qs[trim5:start]
             else:
                 q = q + 1
         i = i + 1
-    print >> sys.stderr, "Reads filtered cause they were too short: ", q
-    print >> sys.stderr, "Reads truncated due to low qualities: ", qq
+    print >> sys.stderr, "trimQs.py:",q,"reads filtered cause they were too short"
+    print >> sys.stderr, "trimQs.py:",qq,"reads truncated due to low qualities: "
 
 if __name__ == "__main__":
     from optparse import OptionParser
@@ -137,7 +122,4 @@ if __name__ == "__main__":
 
     (options, args) = parser.parse_args()
 
-#    if options.fastqF[-5:] == "fastq" or options.fastqF[-2:] == "gz":
     trimQs(options.fastqF,options.notrim,options.trim5,options.trim3,options.minl,options.fiveprime,options.changelength,options.qtype)
- #   else:
-  #      cutIT_fasta(options.fastqF,options.predF,options.cut)

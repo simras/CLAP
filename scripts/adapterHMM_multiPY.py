@@ -7,15 +7,17 @@
 
 def run(orig_file,cut_file,cutoff,mp,model,seq,ntrim,trim,BS,prime,qtype):
     import os
-#    import multiPY
+    import subprocess 
+    import sys
+
     cwd =  os.getcwd()
     adr = cwd + "/../scripts/"
     import random
     if cut_file == "outF":
         file_parts= orig_file.split(".")
-        print file_parts, file_parts[0:-1], file_parts[-1]
+        #print file_parts, file_parts[0:-1], file_parts[-1]
         cut_file = ".".join(file_parts[0:-1]) + "_noAdapt." + file_parts[-1]
-        print cut_file
+        #print cut_file
     if prime:
         primeopt = "-5"
     else:
@@ -24,22 +26,33 @@ def run(orig_file,cut_file,cutoff,mp,model,seq,ntrim,trim,BS,prime,qtype):
     if seq != "":
         model = str(rannum) + "_adaptor_hmm.imod"
         os.system(adr + "mk_model.py " + primeopt + " -s " + seq + " > " + model)
+    # Which platform?
+    p1 = subprocess.Popen(["uname", "-s"],stdout=subprocess.PIPE)
+    kernel = p1.communicate()[0].strip()
+    print "adapterHMM_multiPY.py: Kernel",kernel
+    if kernel  == "Linux":
+        decodeanhmm = "decodeanhmm"
+    elif kernel == "Darwin":
+        decodeanhmm = "decodeanhmm_mac"
+    else:
+        print >>sys.stderr, "adapterHMM_multiPY.py: C binaeies are only compiled for Linux and Mac Unix platforms. This exception can be manually overwritten"
+    # overwrite by uncommenting one of the below lines
+    # decodeanhmm = "decodeanhmm"
+    # decodeanhmm = "decodeanhmm_mac"
+
     blockSize = str(BS)
     outpipe = " > "
     if model == "":
         model = adr + "AdapterHMM.imod"
     if orig_file[-2:] == "gz":
-        # unzip, convert to fasta, decode, cut, return fastq file and gzip
-        cmd = "zcat " + orig_file + " | "+ adr +"trimQs.py " + primeopt + " -l " + str(cutoff) + " -q " + str(qtype) + " " + ntrim + trim +"| awk \'1 == NR % 4,2 == NR % 4\' |" + adr + "multiPY.py -e -p " + str(mp) + " -b " + str(blockSize) + " -l 2 -c \" " + adr + "decodeanhmm -v -PrintNumbers -modelfile " + model + "\"" + " 2> /dev/null | " + adr + "analyzeSignals.py | " + adr + "cutIT.py -f " + orig_file + " -c " + str(cutoff) + " | gzip" + outpipe + cut_file
+        # Construct pipeline command: unzip, convert to fasta, decode, cut, return fastq file and gzip
+        cmd = "zcat " + orig_file + " | "+ adr +"trimQs.py " + primeopt + " -l " + str(cutoff) + " -q " + str(qtype) + " " + ntrim + trim +"| awk \'1 == NR % 4,2 == NR % 4\' |" + adr + "multiPY.py -e -p " + str(mp) + " -b " + str(blockSize) + " -l 2 -c \" " + adr + decodeanhmm  + " -v -PrintNumbers -modelfile " + model + "\"" + " 2> /dev/null | " + adr + "analyzeSignals.py | " + adr + "cutIT.py -f " + orig_file + " -c " + str(cutoff) + " | gzip" + outpipe + cut_file
     else:
-        # convert to fasta, decode, cut and return fastq file
-        cmd = "cat " + orig_file + " | "+ adr +"trimQs.py " + primeopt + " -l " + str(cutoff) + " -q " + str(qtype) + " " + ntrim + trim + "| awk \'1 == NR % 4,2 == NR % 4\' |" + adr + "multiPY.py -e -p " + str(mp) + " -b " + str(blockSize) + " -l 2 -c \" " + adr + "decodeanhmm -v -PrintNumbers -modelfile " +  model + "\"" + " 2> /dev/null | " + adr + "analyzeSignals.py " + primeopt + " | " + adr + "cutIT.py -f " + orig_file + " " + primeopt + " -c " + str(cutoff) + outpipe + cut_file
-    print cmd
+        # Construct pipeline command: convert to fasta, decode, cut and return fastq file
+        cmd = "cat " + orig_file + " | "+ adr +"trimQs.py " + primeopt + " -l " + str(cutoff) + " -q " + str(qtype) + " " + ntrim + trim + "| awk \'1 == NR % 4,2 == NR % 4\' |" + adr + "multiPY.py -e -p " + str(mp) + " -b " + str(blockSize) + " -l 2 -c \" " + adr + decodeanhmm + " -v -PrintNumbers -modelfile " +  model + "\"" + " 2> /dev/null | " + adr + "analyzeSignals.py " + primeopt + " | " + adr + "cutIT.py -f " + orig_file + " " + primeopt + " -c " + str(cutoff) + outpipe + cut_file
+    #print cmd
     os.system(cmd)
         
-#nice cat  | grep -Po -A 1 "^@SRR[0-9]+\.[0-9]+|^[ACGTNacgtn]+$" | grep -v "\-\-" | tr "[ACGTN@]" "[acgtn>]"|parallel --pipe --recstart '>' -k -j 20 --block 10M --nice 30 /net/bin/decodeanhmm -v -PrintNumbers -modelfile /seqdata/krogh/simras/AdapterHMM/AdapterHMM.imod | analyzeSignals.py | cutIT.py -f SRR502851.fastq -c 20 > out.fastq
-
-
 if __name__ == "__main__":
     from optparse import OptionParser
 
