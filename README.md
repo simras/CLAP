@@ -8,11 +8,11 @@ A relatively powerful computer is needed, absolute minimun 4 GB memory, the mapp
 
         git clone https://github.com/simras/CLAP.git
 
-2. Install Python (https://www.python.org/) and Perl , if not alrady installed.
+2. Install Python (https://www.python.org) and Perl (https://www.perl.org), if not alrady installed.
 
 3. Install bwa-pssm (https://github.com/pkerpedjiev/bwa-pssm). bwa-pssm needs to be build from source and requires gdsl.
 
-4. Install bedTools (http://bedtools.readthedocs.io/en/latest/). The easy way is to use package managers, brew on Mac, apt-get on debian/Ubuntu or yum on other Linux distributions
+4. Install bedTools (http://bedtools.readthedocs.io/en/latest). The easy way is to use package managers, brew on Mac, apt-get on debian/Ubuntu or yum on other Linux distributions
 
 5. Install pyicos (https://bitbucket.org/regulatorygenomicsupf/pyicoteo). Needs to be downloaded and installed.
 
