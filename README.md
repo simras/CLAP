@@ -85,7 +85,6 @@ To test that everything works, run:
 It maps, does peak calling and produces a UCSC custom track from reads that map to chr4 in the PAR-CLIP human dataset SRR248532. Since it is a human dataset, it is advice to test that the pipeline is setup correctly before setting it up with annotation for other species.
 
 ## 5. USAGE
-All scripts are provided as are and will only be minimally maintained or supported.<BR>
 To get a help menu run:
         
         scripts/CLAP.sh
