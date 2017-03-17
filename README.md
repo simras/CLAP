@@ -1,7 +1,7 @@
 CLIP Analysis Pipeline - CLAP, is used to analyse CLIP-seq (specifically PAR-CLIP, HITS-CLIP and iCLIP) data. The family of protocols where cross-linking immunoprecipitation coupled with high-throughput sequencing are referred to as CLIP. They are used identify binding sites of RNA-binding proteins and exist in the different flavours mentioned above. The data produced by these protocols have different characteristics which are accounted for in this pipeline, such that it can be used to process the above three versions and combination of them like iCLIP using 4SU nucleosides (PAR-iCLIP).
 
 ## 1. SYSTEM REQUIREMENTS
-A relatively powerful computer is needed, minimun 4 GB memory and with Linux or Mac OS X installed. The pipeline is tested on different versions of Ubuntu, Debian and Mac OS X Sierra. It requires a BASH Shell and some version of awk installed.
+A relatively powerful computer is needed, absolute minimun 4 GB memory, the mapper will work much faster with more memory and with Linux or Mac OS X installed. The pipeline is tested on different versions of Ubuntu, Debian and Mac OS X Sierra. It requires a BASH Shell and some version of awk installed.
 
 ## 2. INSTALLATION AND CONFIGURATION
 1. Clone repository, find a suitable directory and use git to dowload the repository
