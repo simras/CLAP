@@ -24,35 +24,35 @@ name_gtf=$base_URL/gtf/$species/Homo_sapiens.GRCh38.87.chr.gtf.gz
 name_dna=$base_URL/fasta/$species/dna/Homo_sapiens.GRCh38.dna.toplevel.fa.gz
 
 # Get from ftp server and unpack
-wget -O resources/ensembl.$species.$ver.gtf.gz $name_gtf
-wget -O resources/$species.$ver.fa.gz $name_dna
-gunzip resources/ensembl.$species.$ver.gtf.gz
-gunzip resources/$species.$ver.fa.gz
+#wget -O resources/ensembl.$species.$ver.gtf.gz $name_gtf
+#wget -O resources/$species.$ver.fa.gz $name_dna
+#gunzip resources/ensembl.$species.$ver.gtf.gz
+#gunzip resources/$species.$ver.fa.gz
 
 # Create annotation files
-scripts/create_mRNA_genome_annotation3.pl resources/ensembl.$species.$ver.gtf resources/ensembl.$species.$ver "MT"
-rm resources/ensembl.$species.$ver.gtf
+#scripts/create_mRNA_genome_annotation3.pl resources/ensembl.$species.$ver.gtf resources/ensembl.$species.$ver "MT"
+#rm resources/ensembl.$species.$ver.gtf
 
 # Select longest transcript
-scripts/select_longest_transcript.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.cds.txt resources/ensembl.$species.$ver.3utr.txt resources/ensembl.$species.$ver.5utr.txt
+#scripts/select_longest_transcript.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.cds.txt resources/ensembl.$species.$ver.3utr.txt resources/ensembl.$species.$ver.5utr.txt
 
 # Make non-overlapping annotation
-scripts/discard_overlapping_transcripts.pl  resources/ensembl.$species.$ver.all.long.txt > resources/ensembl.$species.$ver.nooverlap.all.long.txt
+#scripts/discard_overlapping_transcripts.pl resources/ensembl.$species.$ver.all.long.txt > resources/ensembl.$species.$ver.nooverlap.all.long.txt
 
-# Make exon annotation for Pyicos
-awk '{OFS="\t"; print $1,$2,$3,".",".",$4}' resources/ensembl.$species.$ver.nooverlap.all.long.txt >  resources/ensembl.$species.$ver.nooverlap.exons.long.txt
+# Make non-overlapping exon annotation for Pyicos
+#awk '{OFS="\t"; print $1,$2,$3,".",".",$4}' resources/ensembl.$species.$ver.nooverlap.all.long.txt >  resources/ensembl.$species.$ver.nooverlap.exons.long.txt
 
 # Process genomic sequence file
-scripts/process_genomic_sequence_file.pl resources/$species.$ver.fa "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,Y,X,MT" "MT" > resources/ensembl.$species.$ver.fa
-rm resources/$species.$ver.fa
+#scripts/process_genomic_sequence_file.pl resources/$species.$ver.fa "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,Y,X,MT" "MT" > resources/ensembl.$species.$ver.fa
+#rm resources/$species.$ver.fa
 
 # Make mapping index
-$bwa index resources/ensembl.$species.$ver.fa
+#$bwa index resources/ensembl.$species.$ver.fa
 
 # Make exon junction sequence library
-scripts/make_exon_junction_library.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.fa > resources/ensembl.$species.$ver.ej.fa
+scripts/make_exon_junction_library.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.fa "MT" > resources/ensembl.$species.$ver.ej.fa
+exit
 rm resources/ensembl.$species.$ver.fa.fai
-
 # Make mapping index
 $bwa index resources/ensembl.$species.$ver.ej.fa
 
@@ -91,7 +91,7 @@ rm resources/$species.$ver.fa
 $bwa index resources/ensembl.$species.$ver.fa
 
 # Make exon junction sequence library
-scripts/make_exon_junction_library.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.fa > resources/ensembl.$species.$ver.ej.fa
+scripts/make_exon_junction_library.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.fa "MT" > resources/ensembl.$species.$ver.ej.fa
 rm resources/ensembl.$species.$ver.fa.fai
 
 # Make mapping index
@@ -132,7 +132,7 @@ rm resources/$species.$ver.fa
 $bwa index resources/ensembl.$species.$ver.fa
 
 # Make exon junction sequence library
-scripts/make_exon_junction_library.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.fa > resources/ensembl.$species.$ver.ej.fa
+scripts/make_exon_junction_library.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.fa "MtDNA" > resources/ensembl.$species.$ver.ej.fa
 rm resources/ensembl.$species.$ver.fa.fai
 
 # Make mapping index
@@ -174,7 +174,7 @@ rm resources/$species.$ver.fa
 $bwa index resources/ensembl.$species.$ver.fa
 
 # Make exon junction sequence library
-scripts/make_exon_junction_library.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.fa > resources/ensembl.$species.$ver.ej.fa
+scripts/make_exon_junction_library.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.fa "dmel_mitochondrion_genome" > resources/ensembl.$species.$ver.ej.fa
 rm resources/ensembl.$species.$ver.fa.fai
 
 # Make mapping index
@@ -216,7 +216,7 @@ rm resources/$species.$ver.fa
 $bwa index resources/ensembl.$species.$ver.fa
 
 # Make exon junction sequence library
-scripts/make_exon_junction_library.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.fa > resources/ensembl.$species.$ver.ej.fa
+scripts/make_exon_junction_library.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.fa "Mito" > resources/ensembl.$species.$ver.ej.fa
 rm resources/ensembl.$species.$ver.fa.fai
 
 # Make mapping index
@@ -257,7 +257,7 @@ rm resources/$species.$ver.fa
 $bwa index resources/ensembl.$species.$ver.fa
 
 # Make exon junction sequence library
-scripts/make_exon_junction_library.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.fa > resources/ensembl.$species.$ver.ej.fa
+scripts/make_exon_junction_library.pl resources/ensembl.$species.$ver.all.txt resources/ensembl.$species.$ver.fa "MT" > resources/ensembl.$species.$ver.ej.fa
 rm resources/ensembl.$species.$ver.fa.fai
 
 # Make mapping index

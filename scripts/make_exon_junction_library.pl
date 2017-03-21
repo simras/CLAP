@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 use strict;
 
-if (@ARGV != 2){
+if (@ARGV != 3){
     print "introduce the annotation file and the genome fasta file\n";
     print "The exon junction  library will be printed to standard out\n";
 
@@ -56,6 +56,7 @@ my $genome_file = $ARGV[1];
 my %final_set;
 my @final_ids;
 my %segments;
+my $chrM_swap  = $ARGV[2];
 
 my $bedfile="annotation".$$.".bed";
 open (T, ">$bedfile") || die ("cannot open $bedfile for writing");
@@ -79,9 +80,8 @@ foreach my $id (keys %junctions){
     $segments[2] = $segments[2] - 1;
 
     # Convert mitochodrial chromosome annotation
-    $chr=~s/MT/M/;
-    $chr=~s/dmel_mitochondrion_genome/M/;
-    $chr=~s/MtDNA/M/;
+    # CHANGE: Should be put as argument, done
+    $chr=~s/$chrM_swap/M/g;
 
     print T join ("\t", $chr,$segments[0],$segments[1],".",".",$strand), "\n";
     print T join ("\t", $chr,$segments[2],$segments[3],".",".",$strand), "\n";
@@ -104,7 +104,7 @@ close (T);
 
 my $seqfile= "out.".$$.".tab";
 my @seqs;
-my $command = "../bedtools2/bin/bedtools getfasta -fi $genome_file -bed $bedfile -tab -fo $seqfile -s";
+my $command = "bedtools getfasta -fi $genome_file -bed $bedfile -tab -fo $seqfile -s";
 
 system ("$command");
 unlink ($bedfile);
@@ -122,16 +122,17 @@ close (SEQ);
 for (my $i = 0; $i < @seqs; $i++){
     $segments{$final_ids[$i]} = $seqs[$i];
 }
-
-## print out fasta file 
+		     
+## print out fasta file
 foreach my $k (keys %final_set){
     my $seq1 = $segments{$final_set{$k}[0]};
     my $seq2 = $segments{$final_set{$k}[1]};
+   
+    my @id1= split ("_", $final_set{$k}[0]);
+    my @id2= split ("_", $final_set{$k}[1]);
 
-    print ">$k\n$seq1$seq2\n";
+    my $final_id = join (":", $id1[0],$id1[5],$id1[1],$id1[2],$id2[1],$id2[2]);
+    print ">$final_id\n$seq1$seq2\n";
 }
-
-		     
-
 
   
