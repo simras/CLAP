@@ -17,7 +17,7 @@
 #stuff
 #end=`date +%s`
 #
-#runtime=$((`date +%s`-start))
+#runtime=$((`date +%s`-start)) sec
 #
 ############
 start=`date +%s`
@@ -111,7 +111,7 @@ scripts=$BASE"/scripts"
 # PSSM path
 #bwa=bwa
 # Absolute path to binary
-bwa=$BASE/../bwa-pssm/bwa
+bwa=$BASE/../../bwa-pssm/bwa
 echo "#################### Testing if pipeline is correctly configured..."
 
 if [ -z $(which $bwa) ]
@@ -230,7 +230,7 @@ then
     # Remove Adaptors
    
     echo "#################### Removing Adapters "
-    echo "#################### Runtime " $((`date +%s`-start))
+    echo "#################### Runtime " $((`date +%s`-start)) sec
     echo
     adapterS=$2
     cd $outFolder
@@ -241,7 +241,7 @@ then
 else
     echo
     echo "#################### Will not remove Adaptors "
-    echo "#################### Runtime " $((`date +%s`-start))
+    echo "#################### Runtime " $((`date +%s`-start)) sec
     echo
     mv $outFolder/$ftmp $outFolder/$f2
 fi
@@ -250,12 +250,12 @@ if [ $6 -eq 1 -o $6 -eq 4 ]
 then
     echo
     echo "#################### Remove duplicates using random barcodes "
-    echo "#################### Runtime " $((`date +%s`-start))
+    echo "#################### Runtime " $((`date +%s`-start)) sec
     echo
 else
     echo
     echo "#################### Remove duplicates without using random barcodes "
-    echo "#################### Runtime " $((`date +%s`-start))
+    echo "#################### Runtime " $((`date +%s`-start)) sec
     echo
     trim=0
 fi
@@ -281,14 +281,14 @@ if [ ${10} -eq 0 ]
 then
 
 echo "#################### Use substituion model " 
-    echo "#################### Runtime " $((`date +%s`-start))
+    echo "#################### Runtime " $((`date +%s`-start)) sec
 echo
     # Map with error model
     $bwa pssm -n $E -l $L -m $H -t $T -P $P $phreadOpt -G $error_model $idx1 $outFolder/$map_reads.fastq  > $outFolder/$map_reads.sai
 else
 
 echo "#################### Do not use substitution model " 
-    echo "#################### Runtime " $((`date +%s`-start))
+    echo "#################### Runtime " $((`date +%s`-start)) sec
 echo
     $bwa pssm -n $E -l $L -m $H -t $T -P $P $phreadOpt $idx1 $outFolder/$map_reads.fastq  > $outFolder/$map_reads.sai
 #    $bwa samse -f $outFolder/$map_reads.sam $idx1 $outFolder/$map_reads.sai $outFolder/$map_reads.fastq
@@ -299,26 +299,26 @@ $bwa samse -f $outFolder/$map_reads.sam $idx1 $outFolder/$map_reads.sai $outFold
 rm $outFolder/$map_reads.sai
 echo
 echo "#################### Genome mapping statistics "
-echo "#################### Runtime " $((`date +%s`-start))
+echo "#################### Runtime " $((`date +%s`-start)) sec
 echo
 cat $outFolder/$map_reads.sam|$scripts/read_stats.py -t $PP 1> $outFolder/$map_reads.mappingstats.txt
 if [ $9 -eq 2 ]
 then
 echo
 echo "#################### Mapping to the exon junctions with bwa-pssm " 
-echo "#################### Runtime " $((`date +%s`-start))
+echo "#################### Runtime " $((`date +%s`-start)) sec
     # Exon-junction mapping
     $scripts/select_unmapped_reads.pl -f $outFolder/$map_reads.fastq -s $outFolder/$map_reads.sam  > $outFolder/$map_exon.fastq
     
     if [ ${10} -eq 0 ]
     then	
 	echo "#################### Use substituion model " 
-	echo "#################### Runtime " $((`date +%s`-start))
+	echo "#################### Runtime " $((`date +%s`-start)) sec
 	echo
 	$bwa pssm -n $E -l $L -m $H -t $T -P $P $phreadOpt -G $error_model $idx3 $outFolder/$map_exon.fastq > $outFolder/$map_exon.sai
     else
 	echo "#################### Do not use substitution model " 
-	echo "#################### Runtime " $((`date +%s`-start))
+	echo "#################### Runtime " $((`date +%s`-start)) sec
 	echo
 	$bwa pssm -n $E -l $L -m $H -t $T -P $P $phreadOpt $idx3 $outFolder/$map_exon.fastq > $outFolder/$map_exon.sai
     fi
@@ -327,7 +327,7 @@ echo "#################### Runtime " $((`date +%s`-start))
     
     echo
     echo "#################### Exon junction mapping statistics "
-    echo "#################### Runtime " $((`date +%s`-start))
+    echo "#################### Runtime " $((`date +%s`-start)) sec
     echo
     cat $outFolder/$map_exon.sam |$scripts/read_stats.py -t $PP -j 1> $outFolder/$map_exon.mappingstats.txt
 fi
@@ -343,7 +343,7 @@ fi
 # peak Calling
 echo
 echo "#################### Calculate False Discovery rate of read clusters with Pyicosclip " 
-echo "#################### Runtime " $((`date +%s`-start))
+echo "#################### Runtime " $((`date +%s`-start)) sec
 echo
 
 if [ $9 -eq 1 ]
@@ -404,7 +404,7 @@ then
     if [ $8 -eq 1 ]
     then
 	echo "#################### UCSC custom tracks for stranded protocol..."
-	echo "#################### Runtime " $((`date +%s`-start))
+	echo "#################### Runtime " $((`date +%s`-start)) sec
 	cat $outFolder/$peak_out|$scripts/pk2bedGraph_info.pl -c 1,2,4,6 -s - -n "-_strand_"$name -d "Clusters on minus-strand" > $outFolder/"UCSC_-_"${FILE%.*}".track"
 	cat $outFolder/$peak_out | $scripts/pk2bedGraph_info.pl -c 1,2,4,6 -s + -n "+_strand_"$name -d  "Clusters on plus-strand" > $outFolder/"UCSC_+_"${FILE%.*}".track"
 	
@@ -412,7 +412,7 @@ then
 	gzip $outFolder/"UCSC_+_"${FILE%.*}".track"
     else
 	echo "#################### UCSC custom track for strandless protocol..."
-	echo "#################### Runtime " $((`date +%s`-start))
+	echo "#################### Runtime " $((`date +%s`-start)) sec
 	cat $outFolder/$peak_out | $scripts/pk2bedGraph_info.pl -c 1,2,4,6 -s "+" -n $name -d "Clusters on both strands" > $outFolder/"UCSC_mp_"${FILE%.*}".track"
 	gzip $outFolder/"UCSC_-+_"${FILE%.*}".track"
     fi
