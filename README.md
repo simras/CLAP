@@ -29,22 +29,22 @@ https://sid.erda.dk/share_redirect/a4shAKTCcf
 
 <b>Ensembl version 87</b><BR>
 <b><i>Homo sapiens</i></b><BR>
-https://sid.erda.dk/share_redirect/e0a4KihL8C
+https://sid.erda.dk/share_redirect/F0uyFvUFfw
         
 <b><i>Mus musculus</i></b><BR>
-https://sid.erda.dk/share_redirect/BlzQzJW8jW
+https://sid.erda.dk/share_redirect/GlFSfjQ4Ev
 
 <b><i>Drosophila melanogaster</i></b><BR>
-https://sid.erda.dk/share_redirect/DxzUSSuL4a
+https://sid.erda.dk/share_redirect/dlHgfG96Ub
 
 <b><i>Caenorhabditis elegans</i></b><BR>
-https://sid.erda.dk/share_redirect/gEs04xFp1S
+https://sid.erda.dk/share_redirect/acs5TT2CKV
 
 <b><i>Rattus norvegicus</i></b><BR>
-https://sid.erda.dk/share_redirect/BB5p5bQ1lR
+https://sid.erda.dk/share_redirect/dMsU6rqomb
 
 <b><i>Saccharomyces cerevisiae</i></b><BR>
-https://sid.erda.dk/share_redirect/DThC7AWM7D
+https://sid.erda.dk/share_redirect/c8ZN3otIi7
 
 The annotation and sequence files are retrieved to the CLAP directory by
 
