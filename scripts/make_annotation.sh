@@ -10,7 +10,11 @@ set -e
 
 # Ensembl release version
 ver=87
+<<<<<<< HEAD
 bwa="../../bwa-pssm/bwa"
+=======
+bwa="../bwa-pssm/bwa"
+>>>>>>> dfffd9825e3c336f6c387d63e64d40d495ac9938
 base_URL="ftp://ftp.ensembl.org/pub/release-"$ver
 
 echo "unfortunately it is not easy to automatically find the record in the database just given a species name in Ensembl ver. 87"
