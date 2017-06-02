@@ -94,8 +94,8 @@ ARGUMENTS:<BR>
 
     $1: Filename
     $2: Remove adapters?
-        0: No
-        Input the adaptor sequence, ex: ACCTGCA...
+        "": Don't remove adapters
+        Otherwise: Adaptor sequence, ex: ACCTGCA...
     $3: Sequence fixed barcode
     $4: length of random barcode
     $5: Remove duplicates?
