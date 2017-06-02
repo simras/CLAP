@@ -32,8 +32,8 @@ if [ $# -lt 14 ]
     echo "ARGUMENTS:" 
     echo "\$1: Filename"
     echo "\$2: Remove adapters?" 
-    echo "    0: No"
-    echo "    If all datasets have the same 3'adaptor just input the adaptor sequence, ex: ACCTGCA..."
+    echo "    \"\": If no adapter"
+    echo "    Adapter sequence, ex: ACCTGCA..."
     echo "\$3: Sequence fixed barcode" 
     echo "\$4: length of random barcode"
     echo "\$5: Remove duplicates?"
@@ -111,7 +111,7 @@ scripts=$BASE"/scripts"
 # PSSM path
 #bwa=bwa
 # Absolute path to binary
-bwa=$BASE/../../bwa-pssm/bwa
+bwa=$BASE/../bwa-pssm/bwa
 echo "#################### Testing if pipeline is correctly configured..."
 
 if [ -z $(which $bwa) ]
@@ -204,8 +204,8 @@ then
     fi
 fi
 ftmp=$barcode"_assigned_"$FILE
-f2=$barcode"_noADPT_"$FILE
-f3=$barcode"_noDUPS_"$FILE
+f2=$barcode"_noADPT_"${FILE%.*}.fastq
+f3=$barcode"_noDUPS_"${FILE%.*}.fastq
 final_bed=$barcode"_merged_"${FILE%.*}.bed
 clusters=$barcode"_"${FILE%.*}"_clusters".bed
 
